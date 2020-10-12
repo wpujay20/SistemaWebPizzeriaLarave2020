@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\tipo_usuario;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return view('vista_login');
+});
+
+
+Route::get('/insertar', function () {
+
+    /*$tipoUsuario = new tipo_usuario();
+    $tipoUsuario->tipo_nombre = "Administrador";
+    $tipoUsuario->tipo_descripcion = "Es el que se encarga de gestionar la informacion del sistema";
+    $tipoUsuario->save();
+    */
+    
+});
+
