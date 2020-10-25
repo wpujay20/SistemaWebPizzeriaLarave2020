@@ -30,7 +30,10 @@ Route::get('/insertar', function () {
     $tipoUsuario->tipo_nombre = "Administrador";
     $tipoUsuario->tipo_descripcion = "Es el que se encarga de gestionar la informacion del sistema";
     $tipoUsuario->save();
-    */
-    
+    */  
 });
+
+
+
+Route::resource('/mantenimientos', MantenimientoController::class);
 
