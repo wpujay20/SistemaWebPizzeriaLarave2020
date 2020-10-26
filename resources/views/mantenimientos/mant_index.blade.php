@@ -8,4 +8,9 @@ Mantenimientos Pizzeria "La Buena Pizza"
 
 @section('cuerpo_seccion')
     <div class="mensaje">Bienvenido a los Mantenimientos de "La Buena Pizza" <div>
+
+
 @endsection
+
+
+

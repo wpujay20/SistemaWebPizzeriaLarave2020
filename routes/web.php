@@ -36,4 +36,5 @@ Route::get('/insertar', function () {
 
 
 Route::resource('/mantenimientos', MantenimientoController::class);
+Route::resource('/usuarios', UsuariosController::class);
 

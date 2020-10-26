@@ -184,6 +184,7 @@
 .cbp-hsmenu > li.cbp-hsitem-open .cbp-hssubmenu {
 	z-index: 1000;
 	visibility: visible;
+	background: whitesmoke;
 }
 
 .cbp-hsmenu > li.cbp-hsitem-open .cbp-hssubmenu > li {

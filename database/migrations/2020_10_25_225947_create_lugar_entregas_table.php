@@ -14,12 +14,9 @@ class CreateLugarEntregasTable extends Migration
     public function up()
     {
         Schema::create('lugar_entregas', function (Blueprint $table) {
-            $table->increments("ventadelivery_id");
-            $table->integer("lugarentrega_id");
-            $table->string("usuario_id");
-            $table->string("personalentrega_id");
-            $table->decimal('vnt_monto_final', 8, 2);
-            $table->string("vnt_estado");
+            $table->increments("lugarentrega_id");
+            $table->string("lugar_direccion"); 
+            $table->string("lugar_distrito");
             $table->timestamps();
         });
     }

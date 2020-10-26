@@ -30,7 +30,7 @@
 	<body>
 		<div class="container">
 			<header class="clearfix">				
-				<div class="logo"><img src="images/buena_pizza_logo.jpg"/></div>
+				<a href="mantenimientos"><div class="logo"><img src="images/buena_pizza_logo.jpg"/></div></a>
 
 				<h1>Mantenimientos</h1>
 			</header>	
@@ -44,8 +44,8 @@
 							<li>
 								<a href="#">Personas</a>
 								<ul class="cbp-hssubmenu cbp-hssub-rows">
-									<li><a href="#"><img src="images/personal_entrega.png" alt="img07"/><span>Personal de Entrega</span></a></li>
-									<li><a href="#"><img src="images/grupo.png" alt="img08"/><span>Usuarios</span></a></li>
+									<li><a href="#"><img src="images/personal_entrega.png" /><span>Personal de Entrega</span></a></li>
+								<li><a href="{{route('usuarios.index')}}"><img src="images/grupo.png"/><span>Usuarios</span></a></li>
 								</ul>
 							</li>
 							<li>
@@ -64,10 +64,14 @@
 
         <section>
             @yield('cuerpo_seccion')
-        </section>
+		</section>
+
+
+		<div class="zonaBotones">
+			@yield('zonaBotones')
+		</div>
     </div>
     
-
     <div class="pie">
         <footer>
             Pizzeria "La buena Pizza" - Todos los derechos Reservados
@@ -84,10 +88,25 @@
     
         <!--    Datatables-->
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>  
-        @yield('importar_js_abajo')
+
+		
+
         <script src="{{ asset('js/cbpHorizontalSlideOutMenu.min.js') }}"></script>
 		<script>
 			var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
+				$(document).ready(function () {
+				$('#tablaCRUD').DataTable(
+					{
+						"lengthMenu": [[5,10, 25, 50], [5,10, 25, 50]],
+						"language": {
+							"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+							}
+					}
+				);
+			});  
 		</script>
+		
+		@yield('importar_js_abajo')
+
 	</body>
 </html>
