@@ -38,14 +38,17 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{$i->per_apellidos}}</td>
             <td>{{$i->per_dni}}</td>
             <td>{{$i->per_telefono}}</td>
-            <th>Eliminar</th>
-            <th>Editar</th>
+            <th> <a href="{{route("usuarios.edit", $i->persona_id)}}" name="editar" class="btn btn-warning"> Editar </a></th>
+            <th><a href="" name="editar" class="btn btn-danger"> Eliminar </a></th>
         </tr>
         @endforeach
 </table>
-
-
 @endsection
+
+
+
+
+
 
 @section('zonaBotones')
     
@@ -102,8 +105,9 @@ Mantenimientos Pizzeria "La Buena Pizza"
                 
                     </div>
                     <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Crear"/>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <input type="submit" class="btn btn-primary"/>
+                    
                     </div>
                 
                     </div>

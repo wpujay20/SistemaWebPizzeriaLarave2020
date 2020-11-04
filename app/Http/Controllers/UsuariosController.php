@@ -91,7 +91,19 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+    
+        $usuario_edit = DB::table('tipo_usuarios')
+        ->join('usuarios', 'usuarios.tipousu_id', '=', 'tipo_usuarios.tipousu_id')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->select('usuarios.*', 'personas.*', 'tipo_usuarios.*')
+        ->where('personas.persona_id', $id)
+        ->get();
+
+        //echo '<pre>' . var_export($usuario_edit, true) . '</pre>';
+        //$usuario_edit = persona::findOrFail($id);
+        
+        return view("mant_usuarios.usuarioEdit", compact("usuario_edit"));
     }
 
     /**
@@ -103,7 +115,31 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        //echo '<pre>' . var_export($request, true) . '</pre>';
+    
+        DB::table('tipo_usuarios')
+        ->join('usuarios', 'usuarios.tipousu_id', '=', 'tipo_usuarios.tipousu_id')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->where('personas.persona_id', $id)
+        ->update([  'per_nombres' =>$request->input("per_nombres"),
+                    'per_apellidos' =>$request->input("per_apellidos"),
+                    'per_dni' =>$request->input("per_dni"),
+                    'per_telefono' =>$request->input("per_telefono"),
+                    'usu_correo' =>$request->input("usu_correo"),
+                    'usu_pass' =>$request->input("usu_pass"),
+                    'tipo_nombre' =>$request->input("tipo_nombre"),
+                    'usu_estado' =>$request->input("usu_estado")
+        ]);
+
+        return redirect("usuarios");
+
+/*
+    DB::table('attributes as a')
+    ->join('catalog as c', 'a.parent_id', '=', 'c.id')
+    ->update([ 'a.key' => DB::raw("`c`.`left_key`") ]); 
+*/
+
     }
 
     /**
@@ -114,6 +150,10 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /* DB::table('deadline', 'job')
+    ->leftJoin('job', 'deadline.id', '=', 'job.deadline_id')
+    ->where('deadline.id', $id)
+    ->delete();
+         */
     }
 }

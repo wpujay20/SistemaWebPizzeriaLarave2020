@@ -30,7 +30,7 @@
 	<body>
 		<div class="container">
 			<header class="clearfix">				
-				<a href="mantenimientos"><div class="logo"><img src="images/buena_pizza_logo.jpg"/></div></a>
+				<a href="mantenimientos"><div class="logo"><img src="{{ asset('images/buena_pizza_logo.jpg') }}"/></div></a>
 
 				<h1>Mantenimientos</h1>
 			</header>	
@@ -44,8 +44,8 @@
 							<li>
 								<a href="#">Personas</a>
 								<ul class="cbp-hssubmenu cbp-hssub-rows">
-									<li><a href="#"><img src="images/personal_entrega.png" /><span>Personal de Entrega</span></a></li>
-								<li><a href="{{route('usuarios.index')}}"><img src="images/grupo.png"/><span>Usuarios</span></a></li>
+									<li><a href="#"><img src="{{ asset('images/personal_entrega.png') }}" /><span>Personal de Entrega</span></a></li>
+								<li><a href="{{route('usuarios.index')}}"><img src="{{ asset('images/grupo.png') }}"/><span>Usuarios</span></a></li>
 								</ul>
 							</li>
 							<li>
