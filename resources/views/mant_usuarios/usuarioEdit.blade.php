@@ -22,11 +22,10 @@ Mantenimientos Pizzeria "La Buena Pizza"
 @endsection
 
 
-
 @section('cuerpo_seccion')
 
 
-{!! Form::model($usuario_edit[0] , ['method'=>'post', 
+{!! Form::model($usuario_edit[0], ['method'=>'post', 
                             'action'=>['UsuariosController@update',
                             $usuario_edit[0]->persona_id]])!!}
     {{csrf_field()}}
@@ -61,11 +60,11 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{Form::label('Tipo de Usuario')}}</td>
 
             <td>
-                @if ($usuario_edit[0]->tipo_nombre == "administrador")
-                    {{Form::select('tipo_nombre', ['administrador' => 'administrador', 'cliente' => 'cliente'],null,[ 'class' => 'form-control'])}}
-                @else
-                    {{Form::select('tipo_nombre', ['cliente' => 'cliente', 'administrador' => 'administrador'],null,['class' => 'form-control'])}}
-                @endif
+                <select class="form-control" name="tipo_usuario">
+                    @foreach ($listatipo_usuario as $key)
+                        <option value="{{$key->tipousu_id}}"> {{$key->tipo_nombre}} </option>
+                    @endforeach
+                </select>
             </td>
         </tr>
         <tr>

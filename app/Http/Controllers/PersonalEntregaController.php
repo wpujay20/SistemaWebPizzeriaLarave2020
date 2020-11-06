@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\personal_entrega;
+use App\estado_personal;
 
 class PersonalEntregaController extends Controller
 {
@@ -14,7 +17,16 @@ class PersonalEntregaController extends Controller
      */
     public function index()
     {
-        //
+
+        $listapersonalEntrega = DB::table('personal_entregas')
+        ->join('estado_personals', 'personal_entregas.estado_id', '=', 'estado_personals.estadopersonal_id')
+        ->select('estado_personals.*', 'personal_entregas.*')
+        ->get();
+
+        $listaEstados = estado_personal::all();
+
+        return view("mant_personal.MantPersonalEntregaIndex", compact("listapersonalEntrega"),  compact("listaEstados"));
+
     }
 
     /**
@@ -35,7 +47,17 @@ class PersonalEntregaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //echo '<pre>' . var_export($request, true) . '</pre>';
+
+        $personal = new personal_entrega();
+        $personal->peen_nombres = $request->nombres;
+        $personal->peen_apellidos = $request->apellidos;
+        $personal->peen_telefono = $request->telefono;
+        $personal->estado_id = $request->estado;;
+        $personal->save();
+
+        return redirect("personal");
     }
 
     /**
@@ -57,7 +79,21 @@ class PersonalEntregaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //personalentrega_id
+                
+    
+        $personalentrega_edit = DB::table('personal_entregas')
+        ->join('estado_personals', 'personal_entregas.estado_id', '=', 'estado_personals.estadopersonal_id')
+        ->select('estado_personals.*', 'personal_entregas.*')
+        ->where('personal_entregas.personalentrega_id', $id)
+        ->get();
+
+        $listaEstados = estado_personal::all(); /**LISTA PARA EL FORM */
+
+        //echo '<pre>' . var_export($personalentrega_edit, true) . '</pre>';
+        //$usuario_edit = persona::findOrFail($id);
+        
+        return view("mant_personal.PersonalEntregaEdit", compact("personalentrega_edit"), compact("listaEstados"));
     }
 
     /**
@@ -69,7 +105,20 @@ class PersonalEntregaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //echo '<pre>' . var_export($request, true) . '</pre>';
+
+
+        DB::table('personal_entregas')
+        ->where('personal_entregas.personalentrega_id', $id)
+        ->update([  'peen_nombres' =>$request->input("peen_nombres"),
+                    'peen_apellidos' =>$request->input("peen_apellidos"),
+                    'peen_telefono' =>$request->input("peen_telefono"),
+                    'estado_id' =>$request->input("estadopersonal_id")
+        ]);
+
+        return redirect("personal");
+
+
     }
 
     /**

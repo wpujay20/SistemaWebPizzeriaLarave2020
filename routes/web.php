@@ -32,11 +32,10 @@ Route::get('/insertar', function () {
     $tipoUsuario->save();
     
 });
-
 */
 
 
-
+Route::resource('/personal', PersonalEntregaController::class);
 Route::resource('/mantenimientos', MantenimientoController::class);
 Route::resource('/usuarios', UsuariosController::class);
 

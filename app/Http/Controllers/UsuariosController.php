@@ -100,10 +100,12 @@ class UsuariosController extends Controller
         ->where('personas.persona_id', $id)
         ->get();
 
+        $listatipo_usuario = tipo_usuario::all(); /**LISTA PARA EL FORM */
+
         //echo '<pre>' . var_export($usuario_edit, true) . '</pre>';
         //$usuario_edit = persona::findOrFail($id);
         
-        return view("mant_usuarios.usuarioEdit", compact("usuario_edit"));
+        return view("mant_usuarios.usuarioEdit", compact("usuario_edit"), compact("listatipo_usuario"));
     }
 
     /**
@@ -116,10 +118,9 @@ class UsuariosController extends Controller
     public function update(Request $request, $id)
     {
 
-        //echo '<pre>' . var_export($request, true) . '</pre>';
+       // echo '<pre>' . var_export($request, true) . '</pre>';
     
-        DB::table('tipo_usuarios')
-        ->join('usuarios', 'usuarios.tipousu_id', '=', 'tipo_usuarios.tipousu_id')
+        DB::table('usuarios')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
         ->where('personas.persona_id', $id)
         ->update([  'per_nombres' =>$request->input("per_nombres"),
@@ -128,7 +129,7 @@ class UsuariosController extends Controller
                     'per_telefono' =>$request->input("per_telefono"),
                     'usu_correo' =>$request->input("usu_correo"),
                     'usu_pass' =>$request->input("usu_pass"),
-                    'tipo_nombre' =>$request->input("tipo_nombre"),
+                    'tipousu_id' =>$request->input("tipo_usuario"),
                     'usu_estado' =>$request->input("usu_estado")
         ]);
 
@@ -150,10 +151,16 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        /* DB::table('deadline', 'job')
-    ->leftJoin('job', 'deadline.id', '=', 'job.deadline_id')
-    ->where('deadline.id', $id)
-    ->delete();
-         */
+
+//echo $id;
+     //echo '<pre>' . var_export($request, true) . '</pre>';
+
+        DB::table('usuarios')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->where('personas.persona_id', $id) ->delete();
+
+        DB::table('personas')->where('personas.persona_id', $id) ->delete();
+
+        return redirect("usuarios");
     }
 }

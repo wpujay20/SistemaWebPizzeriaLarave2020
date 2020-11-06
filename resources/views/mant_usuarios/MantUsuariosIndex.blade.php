@@ -5,7 +5,9 @@
 Mantenimientos Pizzeria "La Buena Pizza"
 @endsection
 
-
+@section('titulo-Mantenimientos')
+    Usuarios
+@endsection
 @section('cuerpo_seccion')
 
     <table id="tablaCRUD" class="table table-striped table-bordered" style="width:100%";>
@@ -38,16 +40,22 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{$i->per_apellidos}}</td>
             <td>{{$i->per_dni}}</td>
             <td>{{$i->per_telefono}}</td>
-            <th> <a href="{{route("usuarios.edit", $i->persona_id)}}" name="editar" class="btn btn-warning"> Editar </a></th>
-            <th><a href="" name="editar" class="btn btn-danger"> Eliminar </a></th>
+
+            <td> <a href="{{route("usuarios.edit", $i->persona_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
+
+            <td>
+                {!! Form::open(['action' => ['UsuariosController@destroy', $i->persona_id]]) !!}
+
+                    {{csrf_field()}}
+                    {{method_field('DELETE') }}
+                    
+                    {{Form::submit('Eliminar',['class'=>'btn btn-danger'])}}
+                {!! Form::close() !!}
+            </td>
         </tr>
         @endforeach
 </table>
 @endsection
-
-
-
-
 
 
 @section('zonaBotones')
@@ -83,7 +91,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
                                 <input name="correo" type="email" class="form-control"aria-describedby="emailHelp" placeholder="Ingresar Correo">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Contrsaeña</label>
+                                <label for="exampleInputPassword1">Contraseña</label>
                                 <input name="contra" type="password" class="form-control" placeholder="Contraseña">
                             </div>
                             <div class="form-group">
