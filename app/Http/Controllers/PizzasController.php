@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\pizza;
+use App\tipo_pizza;
+
+
 
 class PizzasController extends Controller
 {
@@ -14,7 +19,15 @@ class PizzasController extends Controller
      */
     public function index()
     {
-        //
+        $listaPizzas = DB::table('pizzas')
+        ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
+        ->select('tipo_pizzas.*', 'pizzas.*')
+        ->get();
+
+        $listaTiposPizzas = tipo_pizza::all();
+
+        return view("mant_pizzas.MantPizzasIndex", compact("listaPizzas"),  compact("listaTiposPizzas"));
+
     }
 
     /**
@@ -24,7 +37,7 @@ class PizzasController extends Controller
      */
     public function create()
     {
-        //
+            //
     }
 
     /**
@@ -35,8 +48,49 @@ class PizzasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //echo '<pre>' . var_export($request, true) . '</pre>';
+
+            /*Obtenemos los datos del formulario */
+            $entrada = $request->all();
+            $array = array();
+
+            //echo '<pre>' . var_export($entrada, true) . '</pre>';
+             /*obtenemos los datos de la imagen (archivo) */
+            
+                if($archivo = $request->file('pizza_img')){
+                    
+                    $tipoArchivo =  $archivo->getClientMimeType();
+
+                    if($tipoArchivo == 'image/png' || $tipoArchivo == 'image/jpeg' || $tipoArchivo == 'image/jpg'){
+                        //echo $archivo->$mimeType;
+                        //echo "imagen correcta";
+
+                        //die();
+                        /*NOMBRE DE LA IMAGEN QUE LLEGO*/
+                        $nombre = $archivo->getClientOriginalName(); 
+                    
+                        /*Movimiento de la imagen a la carpeta public/images/  */
+                        $archivo->move('images', $nombre);
+                    
+                        /*Almacenamos la ruta para enviarla */
+                        $entrada['pizza_img'] = $nombre;
+                        echo $nombre;
+                        //die();
+                    }
+                    else{
+                        echo "imagen incorrecta";
+                        //die();
+                        return redirect("pizzas");
+                    }
+                } else{
+                    $entrada['pizza_img'] = "Sin Imagen";
+                }
+
+                   /*Enviamos los datos a la BBDD */
+                    pizza::create($entrada);
+        
+                    return redirect("pizzas");
+        }
 
     /**
      * Display the specified resource.
@@ -57,7 +111,19 @@ class PizzasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $PizzaEdit = DB::table('pizzas')
+        ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
+        ->select('tipo_pizzas.*', 'pizzas.*')
+        ->where('pizzas.pizza_id', $id)
+        ->get();
+
+        $listaTiposPizzas = tipo_pizza::all();
+
+        /*echo '<pre>' . print_r($PizzaEdit, true) . '</pre>';
+        echo '<pre>' . print_r($listaTiposPizzas, true) . '</pre>';*/
+
+        return view("mant_pizzas.PizzasEdit", compact("PizzaEdit"), compact("listaTiposPizzas"));
+    
     }
 
     /**
@@ -69,7 +135,38 @@ class PizzasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $entrada = $request->all();
+        
+                if($archivo = $request->file('pizza_img')){
+                    
+                    $tipoArchivo =  $archivo->getClientMimeType();
+                    if($tipoArchivo == 'image/png' || $tipoArchivo == 'image/jpeg' || $tipoArchivo == 'image/jpg'){
+        
+                        $nombre = $archivo->getClientOriginalName(); 
+                        $archivo->move('images', $nombre);
+                        $entrada['pizza_img'] = $nombre;
+                    }
+                    else{
+                        return redirect("pizzas");
+                    }
+                } 
+
+                if($archivo==null || $archivo = "" ){
+                    $entrada['pizza_img'] = "Sin Imagen";
+                }
+
+                DB::table('pizzas')
+                ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
+                ->select('tipo_pizzas.*', 'pizzas.*')
+                ->where('pizzas.pizza_id', $id)
+                ->update([  'pizza_nombre' =>$request->input("pizza_nombre"),
+                            'pizza_precio' =>$request->input("pizza_precio"),
+                            'pizza_descripcion' =>$request->input("pizza_descripcion"),
+                            'pizzas.tipopizza_id' =>$request->input("tipopizza_id"),
+                            'pizza_img' =>$entrada['pizza_img']
+                ]);
+                return redirect("pizzas");
+
     }
 
     /**
@@ -80,6 +177,10 @@ class PizzasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $pizza = pizza::findOrFail($id);
+        $pizza->delete();
+        return redirect("pizzas");
+
     }
 }

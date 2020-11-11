@@ -30,8 +30,8 @@
 	<body>
 		<div class="container">
 			<header class="clearfix">				
-				<a href="mantenimientos"><div class="logo"><img src="{{ asset('images/buena_pizza_logo.jpg') }}"/></div></a>
-
+				<a href="{{route('mantenimientos.index')}}"><div class="logo"><img src="{{ asset('images/buena_pizza_logo.jpg') }}"/></div></a>
+				<br><br>
 				<h1> @yield('titulo-Mantenimientos') </h1>
 			</header>	
 			<div class="main">
@@ -50,7 +50,12 @@
 							</li>
 							<li>
 								<a href="#">Pizzas</a>
+								<ul class="cbp-hssubmenu cbp-hssub-rows">
+									<li><a href="{{route('pizzas.index')}}"><img src="{{ asset('images/rebanada-de-pizza.png') }}" /><span>Pizzas</span></a></li>
+									<li><a href="{{route('tipo_pizzas.index')}}"><img src="{{ asset('images/lista.png') }}"/><span>Pizzas (Tipos)</span></a></li>
+								</ul>
 							</li>
+							
 							<li><a href="#">Ventas</a></li>
 							<li><a href="">Cerrar Sesion</a></li>
 						</ul>

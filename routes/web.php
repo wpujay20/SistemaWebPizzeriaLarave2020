@@ -38,4 +38,8 @@ Route::get('/insertar', function () {
 Route::resource('/personal', PersonalEntregaController::class);
 Route::resource('/mantenimientos', MantenimientoController::class);
 Route::resource('/usuarios', UsuariosController::class);
+Route::resource('/pizzas', PizzasController::class);
+Route::resource('/tipo_pizzas', tipo_pizzasController::class);
+
+
 
