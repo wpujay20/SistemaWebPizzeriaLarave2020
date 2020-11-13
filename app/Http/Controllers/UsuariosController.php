@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUsuariosRequest;
+
 use App\usuario;
 use App\tipo_usuario;
 use App\persona;
@@ -48,7 +50,7 @@ class UsuariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUsuariosRequest $request)
     {
         $persona = new persona();
         $persona->per_nombres = $request->nombre;

@@ -41,9 +41,9 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{$i->per_dni}}</td>
             <td>{{$i->per_telefono}}</td>
 
-            <td> <a href="{{route("usuarios.edit", $i->persona_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
+            <td style="text-align:center"> <a href="{{route("usuarios.edit", $i->persona_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
 
-            <td>
+            <td style="text-align:center">
                 {!! Form::open(['action' => ['UsuariosController@destroy', $i->persona_id]]) !!}
 
                     {{csrf_field()}}

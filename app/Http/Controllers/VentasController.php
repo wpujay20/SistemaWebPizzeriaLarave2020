@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\venta_delivery;
+use App\detalle_venta;
+use Illuminate\Support\Facades\DB;
+
 
 class VentasController extends Controller
 {
@@ -14,7 +18,17 @@ class VentasController extends Controller
      */
     public function index()
     {
-        //
+
+        $listaVentas = DB::table('venta_deliveries')
+        ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
+        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
+        ->select('venta_deliveries.*', 'lugar_entregas.*',  'usuarios.*',  'personas.*', 'personal_entregas.*')
+        ->get();
+
+        return view("mant_ventas.MantVentasIndex", compact("listaVentas"));
+
     }
 
     /**
@@ -46,7 +60,19 @@ class VentasController extends Controller
      */
     public function show($id)
     {
-        //
+        $DetalleVentas = DB::table('detalle_ventas')
+        ->join('venta_deliveries', 'detalle_ventas.ventadelivery_id', '=', 'venta_deliveries.ventadelivery_id')
+        ->join('pizzas', 'pizzas.pizza_id', '=', 'detalle_ventas.pizza_id')
+        ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
+        ->join('tipo_pizzas', 'tipo_pizzas.tipopizza_id', '=', 'pizzas.tipopizza_id')
+        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
+        ->select('detalle_ventas.*', 'venta_deliveries.*', 'pizzas.*', 'lugar_entregas.*', 'tipo_pizzas.*', 'usuarios.*',  'personas.*', 'personal_entregas.*')
+        ->where('venta_deliveries.ventadelivery_id', $id)
+        ->get();
+
+        return view("mant_ventas.MantVentasShow", compact("DetalleVentas"));
     }
 
     /**

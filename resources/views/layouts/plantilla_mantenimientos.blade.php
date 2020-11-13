@@ -56,7 +56,7 @@
 								</ul>
 							</li>
 							
-							<li><a href="#">Ventas</a></li>
+							<li><a href="{{route('ventas_delivery.index')}}">Ventas</a></li>
 							<li><a href="">Cerrar Sesion</a></li>
 						</ul>
 					</div>
@@ -102,7 +102,7 @@
 				$(document).ready(function () {
 				$('#tablaCRUD').DataTable(
 					{
-						"lengthMenu": [[5,10, 25, 50], [5,10, 25, 50]],
+						"lengthMenu": [[10, 25, 50], [10, 25, 50]],
 						"language": {
 							"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 							}

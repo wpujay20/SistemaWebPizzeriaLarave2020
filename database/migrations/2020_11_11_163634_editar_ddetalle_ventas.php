@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditaVentaDeliveries extends Migration
+class EditarDdetalleVentas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class EditaVentaDeliveries extends Migration
      */
     public function up()
     {
-        Schema::table('venta_deliveries', function (Blueprint $table) {
-            $table->dropColumn('vnt_estado');
+        Schema::table('detalle_ventas', function (Blueprint $table) {
+            $table->dropColumn("det_estado"); 
         });
     }
 
@@ -25,7 +25,7 @@ class EditaVentaDeliveries extends Migration
      */
     public function down()
     {
-        Schema::table('venta_deliveries', function (Blueprint $table) {
+        Schema::table('detalle_ventas', function (Blueprint $table) {
             //
         });
     }

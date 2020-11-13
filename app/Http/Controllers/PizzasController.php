@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePizzasRequest;
+
 use App\pizza;
 use App\tipo_pizza;
 
@@ -46,15 +48,13 @@ class PizzasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePizzasRequest $request)
     {
-        //echo '<pre>' . var_export($request, true) . '</pre>';
 
             /*Obtenemos los datos del formulario */
             $entrada = $request->all();
             $array = array();
 
-            //echo '<pre>' . var_export($entrada, true) . '</pre>';
              /*obtenemos los datos de la imagen (archivo) */
             
                 if($archivo = $request->file('pizza_img')){
@@ -62,10 +62,7 @@ class PizzasController extends Controller
                     $tipoArchivo =  $archivo->getClientMimeType();
 
                     if($tipoArchivo == 'image/png' || $tipoArchivo == 'image/jpeg' || $tipoArchivo == 'image/jpg'){
-                        //echo $archivo->$mimeType;
-                        //echo "imagen correcta";
 
-                        //die();
                         /*NOMBRE DE LA IMAGEN QUE LLEGO*/
                         $nombre = $archivo->getClientOriginalName(); 
                     
@@ -75,11 +72,8 @@ class PizzasController extends Controller
                         /*Almacenamos la ruta para enviarla */
                         $entrada['pizza_img'] = $nombre;
                         echo $nombre;
-                        //die();
                     }
                     else{
-                        echo "imagen incorrecta";
-                        //die();
                         return redirect("pizzas");
                     }
                 } else{
@@ -89,7 +83,7 @@ class PizzasController extends Controller
                    /*Enviamos los datos a la BBDD */
                     pizza::create($entrada);
         
-                    return redirect("pizzas");
+            return redirect("pizzas");
         }
 
     /**

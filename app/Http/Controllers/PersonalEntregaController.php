@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePersonalRequest;
+
 use App\personal_entrega;
 use App\estado_personal;
 
@@ -45,10 +47,8 @@ class PersonalEntregaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePersonalRequest $request)
     {
-
-        //echo '<pre>' . var_export($request, true) . '</pre>';
 
         $personal = new personal_entrega();
         $personal->peen_nombres = $request->nombres;

@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateTipoPizzasRequest;
+
+use App\tipo_pizza;
+
+
 
 class tipo_pizzasController extends Controller
 {
@@ -13,7 +20,12 @@ class tipo_pizzasController extends Controller
      */
     public function index()
     {
-        //
+
+
+        $listaTiposPizzas = tipo_pizza::all();
+
+        return view("mant_tipo_pizzas.MantTipoPizzasIndex", compact("listaTiposPizzas"));
+
     }
 
     /**
@@ -32,9 +44,12 @@ class tipo_pizzasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTipoPizzasRequest $request)
     {
-        //
+        $entrada = $request->all();
+        tipo_pizza::create($entrada);
+
+        return redirect("tipo_pizzas");
     }
 
     /**
@@ -56,7 +71,12 @@ class tipo_pizzasController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
+        $TipoPizzaEdit = tipo_pizza::findOrFail($id);
+    
+        return view("mant_tipo_pizzas.TipoPizzasEdit", compact("TipoPizzaEdit"));
+    
     }
 
     /**
@@ -68,7 +88,11 @@ class tipo_pizzasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tipoEditar = tipo_pizza::findOrFail($id);
+        $tipoEditar->update($request->all());
+
+        return redirect("tipo_pizzas");
+        
     }
 
     /**
@@ -79,6 +103,9 @@ class tipo_pizzasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tipoEditar = tipo_pizza::findOrFail($id);
+        $tipoEditar->delete();
+        return redirect("tipo_pizzas");
+
     }
 }
