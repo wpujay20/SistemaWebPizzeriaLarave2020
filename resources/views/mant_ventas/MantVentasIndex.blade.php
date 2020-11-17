@@ -25,7 +25,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <th>Direccion/Distrito</th>
             <th>Personal Entrega</th>
             <th>Estado Venta</th>
-
+            <th>Editar</th>
             <th>Visualizar</th>
         </tr>
     </thead>
@@ -49,6 +49,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
                 @endif
             </td>
 
+            <td style="text-align:center"> <a href="{{route('ventas_delivery.edit', $i->ventadelivery_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
             <td style="text-align:center"> <a href="{{route('ventas_delivery.show', $i->ventadelivery_id)}}" name="detalle" class="btn btn-primary"> Detalle </a></td>
 
         </tr>

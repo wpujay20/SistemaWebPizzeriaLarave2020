@@ -6,83 +6,74 @@ Mantenimientos Pizzeria "La Buena Pizza"
 @endsection
 
 @section('importar_css_arriba')
-
-
     <style>
         td{
             padding: 6px;
         }
-
         table{
-            margin: 10px auto;
+            margin: 5px auto;
         }
-
-
     </style>
+        <link href="{{ asset('css/Show_DetalleVentas.css') }}" rel="stylesheet">
+
 @endsection
 
 
 @section('cuerpo_seccion')
 
+<table>
+    <tr>
+        <td><label>Fecha y Hora de venta:</label></td>
+        <td><p>{{$listaVentasEdit[0]->created_at}}</p></td>
+    </tr>
+    <tr>
+        <td><label>Cliente:</label></td>
+        <td><p> {{$listaVentasEdit[0]->per_nombres. " ". $listaVentasEdit[0]->per_apellidos}}</p></td>
+    </tr>
+    <tr>
+        <td><label>Direccion de Entrega:</label></td>
+        <td><p>{{$listaVentasEdit[0]->lugar_direccion . "-".$listaVentasEdit[0]->lugar_distrito }}</p></td>
+    </tr>
+    <tr>
+        <td><label>Personal de Entrega:</label></td>
+        <td><p>{{$listaVentasEdit[0]->peen_nombres . " ".$listaVentasEdit[0]->peen_apellidos }}</p></td>
+    </tr>
+    <tr>
+        <td><label>Estado de Venta:</label></td>
+        <td><p>
+            @if ($listaVentasEdit[0]->vnt_estado=="cancelado")
+                <span class="naranja">{{$listaVentasEdit[0]->vnt_estado}}</span>
+            @elseif ($listaVentasEdit[0]->vnt_estado=="en camino")
+                <span class="azul">{{$listaVentasEdit[0]->vnt_estado}}</span>    
+            @else
+                <span class="verde">{{$listaVentasEdit[0]->vnt_estado}}</span>    
+            @endif
+            </p>
+        </td>
+    </tr>
+</table>
 
-{!! Form::model($usuario_edit[0], ['method'=>'post', 
-                            'action'=>['UsuariosController@update',
-                            $usuario_edit[0]->persona_id]])!!}
+
+
+
+
+
+
+{!! Form::model($listaVentasEdit[0], ['method'=>'post', 
+                            'action'=>['VentasController@update',
+                            $listaVentasEdit[0]->ventadelivery_id]])!!}
     {{csrf_field()}}
     {{method_field('PUT') }}
 
     <table>
         <tr>
-            <td>{{Form::label('Nombre')}}</td>
-            <td>{{Form::text('per_nombres', $usuario_edit[0]->per_nombres,['class'=>'form-control'])}}</td>
-        </tr>
-        <tr>
-            <td>{{Form::label('Apellidos')}}</td>
-            <td>{{Form::text('per_apellidos', $usuario_edit[0]->per_apellidos,['class'=>'form-control'])}} </td>
-        </tr>
-        <tr>
-            <td>{{Form::label('DNI')}}</td>
-            <td>{{Form::text('per_dni', $usuario_edit[0]->per_dni,['class'=>'form-control'])}} </td>
-        </tr>
-        <tr>
-            <td>{{Form::label('Telefono')}}</td>
-            <td>{{Form::text('per_telefono', $usuario_edit[0]->per_telefono,['class'=>'form-control'])}} </td>
-        </tr>
-        <tr>
-            <tr>
-            <td>{{Form::label('Correo')}}</td>
-            <td>{{Form::text('usu_correo', $usuario_edit[0]->usu_correo,['class'=>'form-control'])}} </td>
-        </tr>
-            <td>{{Form::label('Contraseña')}}</td>
-            <td>{{Form::text('usu_pass', $usuario_edit[0]->usu_pass,['class'=>'form-control'])}} </td>
-        </tr>
-        <tr>
-            <td>{{Form::label('Tipo de Usuario')}}</td>
-
-            <td>
-                <select class="form-control" name="tipo_usuario">
-                    @foreach ($listatipo_usuario as $key)
-                        <option value="{{$key->tipousu_id}}"> {{$key->tipo_nombre}} </option>
-                    @endforeach
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td>{{Form::label('Estado')}}</td>
-            <td>
-                @if ($usuario_edit[0]->usu_estado == "habilitado")
-                    {{Form::select('usu_estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'],null,[ 'class' => 'form-control'])}}
-                @else
-                    {{Form::select('usu_estado', ['deshabilitado' => 'deshabilitado', 'habilitado' => 'habilitado'],null,['class' => 'form-control'])}}
-                @endif
-            </td>
+            <td>{{Form::select('vnt_estado',['en camino'=>'en camino','cancelado'=>'cancelado','entregado'=>'entregado'],'vnt_estado',['class'=>'form-control','placeholder'=>'Seleccione Estado']) }}</td>
         </tr>
-
         <tr>
             <td colspan="2" align="center" class="botones">
-                {{link_to('usuarios', $title = "Regresar", $attributes = array('class' => 'btn btn-secondary'))}}
+                {{link_to('ventas_delivery', $title = "Regresar", $attributes = array('class' => 'btn btn-secondary'))}}
                 {{Form::submit('Editar',['class'=>'btn btn-warning'])}}
-                
             </td>   
         </tr>
 </table>
@@ -92,5 +83,4 @@ Mantenimientos Pizzeria "La Buena Pizza"
 
 
 @section('zonaBotones')
-    
 @endsection

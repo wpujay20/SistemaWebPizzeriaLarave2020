@@ -513,6 +513,7 @@ class ComposerStaticInitfd56406dc166c5d10b077b1575e22b32
         'App\\Http\\Requests\\CreatePizzasRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreatePizzasRequest.php',
         'App\\Http\\Requests\\CreateTipoPizzasRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreateTipoPizzasRequest.php',
         'App\\Http\\Requests\\CreateUsuariosRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreateUsuariosRequest.php',
+        'App\\Http\\Requests\\EditVentasRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EditVentasRequest.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

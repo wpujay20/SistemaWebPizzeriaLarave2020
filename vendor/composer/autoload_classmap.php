@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Requests\\CreatePizzasRequest' => $baseDir . '/app/Http/Requests/CreatePizzasRequest.php',
     'App\\Http\\Requests\\CreateTipoPizzasRequest' => $baseDir . '/app/Http/Requests/CreateTipoPizzasRequest.php',
     'App\\Http\\Requests\\CreateUsuariosRequest' => $baseDir . '/app/Http/Requests/CreateUsuariosRequest.php',
+    'App\\Http\\Requests\\EditVentasRequest' => $baseDir . '/app/Http/Requests/EditVentasRequest.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

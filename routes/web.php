@@ -23,9 +23,24 @@ Route::get('/login', function () {
     return view('vista_login');
 });
 
+
+Route::get('/index_buena_pizza', function () {
+    $lista = date('Y-m-d');
+    return view('vistas.index', compact("lista"));
+});
+
+
+
+Route::get('/promociones', function () {
+    return view('vistas.Promociones');
+});
+
+
+
+
+
 /*
 Route::get('/insertar', function () {
-
     $tipoUsuario = new tipo_usuario();
     $tipoUsuario->tipo_nombre = "Administrador";
     $tipoUsuario->tipo_descripcion = "Es el que se encarga de gestionar la informacion del sistema";
@@ -41,6 +56,10 @@ Route::resource('/usuarios', UsuariosController::class);
 Route::resource('/pizzas', PizzasController::class);
 Route::resource('/tipo_pizzas', tipo_pizzasController::class);
 Route::resource('/ventas_delivery', VentasController::class);
+
+Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
+Route::resource('/CarroCompras', CarroComprasController::class);
+Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 
 
 

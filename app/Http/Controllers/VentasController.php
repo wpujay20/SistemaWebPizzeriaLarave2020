@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\venta_delivery;
 use App\detalle_venta;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\EditVentasRequest;
 
 
 class VentasController extends Controller
@@ -83,9 +84,17 @@ class VentasController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $listaVentasEdit = DB::table('venta_deliveries')
+        ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
+        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
+        ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
+        ->select('venta_deliveries.*', 'lugar_entregas.*',  'usuarios.*',  'personas.*', 'personal_entregas.*')
+        ->where('venta_deliveries.ventadelivery_id', $id)
+        ->get();
 
+        return view("mant_ventas.MantVentasEdit", compact("listaVentasEdit"));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -93,9 +102,12 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditVentasRequest $request, $id)
     {
-        //
+        //echo '<pre>' . var_export($request, true) . '</pre>';
+        $venta_delivery = venta_delivery::findOrFail($id);
+        $venta_delivery->update($request->all());
+        return redirect("ventas_delivery");
     }
 
     /**

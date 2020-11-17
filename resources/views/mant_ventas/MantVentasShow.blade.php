@@ -31,6 +31,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td><label>Direccion de Entrega:</label></td>
             <td><p>{{$DetalleVentas[0]->lugar_direccion . "-".$DetalleVentas[0]->lugar_distrito }}</p></td>
         </tr>
+
         <tr>
             <td><label>Estado de Venta:</label></td>
             <td><p>
@@ -46,9 +47,6 @@ Mantenimientos Pizzeria "La Buena Pizza"
         </tr>
     </table>
 
-    
-
-
     <div class="boton">{{link_to('ventas_delivery', $title = "Regresar", $attributes = array('class' => 'btn btn-secondary'))}}</div>
 </div>
 
@@ -60,8 +58,9 @@ Mantenimientos Pizzeria "La Buena Pizza"
                 <th>Nombre Pizza</th>
                 <th>Tipo Pizza</th>
                 <th>Tamaño Pizza</th>
-                <th>Precio .U</th>
                 <th>Cantidad</th>
+                <th>Precio .U</th>
+                <th>SubTotal</th>
             </tr>
         </thead>
 
@@ -72,8 +71,10 @@ Mantenimientos Pizzeria "La Buena Pizza"
                 <td>{{$i->pizza_nombre}}</td>
                 <td>{{$i->tpi_nombre}}</td>
                 <td>{{$i->tpi_tamano}}</td>
-                <td>{{$i->pizza_precio}}</td>
                 <td>{{$i->det_cantidad}}</td>
+                <td>{{$i->det_precio_unitario}}</td>
+                <td>{{$i->det_subtotal}}</td>
+
 
             </tr>
             @endforeach

@@ -16,8 +16,6 @@ Mantenimientos Pizzeria "La Buena Pizza"
         table{
             margin: 10px auto;
         }
-
-
     </style>
 @endsection
 
