@@ -31,37 +31,47 @@
 						<h2><label href="#">Mi perfil - {{$Perfil[0]->tipo_nombre}} </label></h2>
 					</div>
 				</header>
-					<form action="/">
-						<div style="display: flex;justify-content: space-between; ">
-							<div style="width: 40%;">
-								<label for="fname">Nombre:</label>
-								<input value="{{$Perfil[0]->per_nombres}}" type="text" id="fname" name="fname" placeholder="Nombre" disabled> </div>
-							<div style="width: 55%;">
-								<label for="fname">Apellidos:</label>
-								<input value="{{$Perfil[0]->per_apellidos}}" type="text" id="fname" name="fname" placeholder="Apellidos" disabled></div>
-						</div><br>
-						<div style="display: flex;justify-content: space-between;">
-							<div style="width: 45%;">
-								<label for="fname">N° DNI:</label>
-								<input  value="{{$Perfil[0]->per_dni}}" type="text" id="fname" name="fname" placeholder="DNI" disabled ></div>
-								
-							<div style="width: 50%;">
-								<label for="fname">Telefono movil:</label>
-								<input value="{{$Perfil[0]->per_telefono}}"  type="text" id="fname" name="fname" placeholder="Movil celular" disabled></div>
-						</div><br>
-						<label for="lname">Correo Electronico:</label>
-						<input type="email" value="{{$Perfil[0]->usu_correo}}" id="lname" name="lname" placeholder="Correo@example.com" disabled>
-						<br>
-						
-						<label for="lname">Contraseña:</label>
-						<input value="{{$Perfil[0]->usu_pass}}" type="password" id="lname" name="lname" placeholder="Contraseña" disabled>
-						<br>
-						<button type="submit" id="mp">Mofidicar perfil</button><br><br>
-					</form>
-			</article>
+						{!! Form::model($Perfil[0], ['method'=>'post',  'action'=>['PerfilDeUsuarioController@update', $Perfil[0]->persona_id]])!!}
 
-		</div>
+							{{csrf_field()}}
+							{{method_field('PUT') }}
+
+							<table>
+								<tr>
+									<td>{{Form::label('Nombre')}}</td>
+									<td>{{Form::text('per_nombres', $Perfil[0]->per_nombres,['class'=>'form-control'])}}</td>
+								</tr>
+								<tr>
+									<td>{{Form::label('Apellidos')}}</td>
+									<td>{{Form::text('per_apellidos', $Perfil[0]->per_apellidos,['class'=>'form-control'])}} </td>
+								</tr>
+								<tr>
+									<td>{{Form::label('DNI')}}</td>
+									<td>{{Form::text('per_dni', $Perfil[0]->per_dni,['class'=>'form-control'])}} </td>
+								</tr>
+								<tr>
+									<td>{{Form::label('Telefono')}}</td>
+									<td>{{Form::text('per_telefono', $Perfil[0]->per_telefono,['class'=>'form-control'])}} </td>
+								</tr>
+								<tr>
+									<tr>
+									<td>{{Form::label('Correo')}}</td>
+									<td>{{Form::text('usu_correo', $Perfil[0]->usu_correo,['class'=>'form-control'])}} </td>
+								</tr>
+									<td>{{Form::label('Contraseña')}}</td>
+									<td>{{Form::text('usu_pass', $Perfil[0]->usu_pass,['class'=>'form-control'])}} </td>
+								</tr>
 	
+								<tr>
+									<td colspan="2" align="center" class="botones">
+										{{link_to('index_buena_pizza', $title = "Regresar", $attributes = array("class"=>"button medium"), $secure = null)}}					
+										{{Form::submit('Modificar Perfil')}}
+									</td>   
+								</tr>
+						</table>
+						{!! Form::close() !!}	
+			</article>
+		</div>
 	</div>
 	@endsection
 </body>

@@ -30,10 +30,14 @@ Route::get('/index_buena_pizza', function () {
 });
 
 
-
 Route::get('/promociones', function () {
     return view('vistas.Promociones');
 });
+
+Route::get('/login', function () {
+    return view('vistas.vista_login');
+});
+
 
 
 

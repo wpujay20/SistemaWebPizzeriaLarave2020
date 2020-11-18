@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditPerfilUsuario;
+use App\Http\Requests\CreatePerfilUsuarioRequest;
+
+use App\usuario;
+use App\persona;
+
+
 
 class PerfilDeUsuarioController extends Controller
 {
@@ -15,7 +22,8 @@ class PerfilDeUsuarioController extends Controller
      */
     public function index()
     {
-        //
+        
+        return view("vistas.PerfilUsuario.crearUsuario");
     }
 
     /**
@@ -34,9 +42,28 @@ class PerfilDeUsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePerfilUsuarioRequest $request)
     {
-        //
+
+        $persona = new persona();
+        $persona->per_nombres = $request->per_nombres;
+        $persona->per_apellidos = $request->per_apellidos;
+        $persona->per_dni = $request->per_dni;
+        $persona->per_telefono = $request->per_telefono;
+        $persona->save();
+
+        $ultimoId = persona::latest('persona_id')->first();
+        $Id=  $ultimoId["persona_id"];
+
+        $usuario = new usuario();
+        $usuario->tipousu_id = 2;
+        $usuario->usu_correo = $request->usu_correo;
+        $usuario->usu_pass = $request->usu_pass;
+        $usuario->usu_estado = "habilitado";
+        $usuario->persona_id = $Id;
+        $usuario->save();
+
+        return redirect("index_buena_pizza");
     }
 
     /**
@@ -75,9 +102,19 @@ class PerfilDeUsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditPerfilUsuario $request, $id)
     {
-        //
+
+                DB::table('usuarios')
+                ->join('personas','personas.persona_id', '=', 'usuarios.persona_id')
+                ->where('personas.persona_id', $id)
+                ->update([  'per_nombres' =>$request->input("per_nombres"),
+                            'per_apellidos' =>$request->input("per_apellidos"),
+                            'per_dni' =>$request->input("per_dni"),
+                            'per_telefono' =>$request->input("per_telefono"),
+                            'usu_correo' =>$request->input("usu_correo"),
+                            'usu_pass' =>$request->input("usu_pass")]);
+                return redirect("PerfilDeUsuario/$id");
     }
 
     /**

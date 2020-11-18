@@ -56,39 +56,32 @@
 			<section>
 				<ul class="links">
 					<li>
-						<a href="{{route("PerfilDeUsuario.show", 6)}}" name="Perfil"> 
+						<a href="{{route("PerfilDeUsuario.show", 13)}}" name="Perfil"> 
 							<h3>Mi Perfil</h3>
 						</a>
 						<p><span> Aqui podrás gestionar los datos de tu perfil</span></p>
 					</li>
 					<li>
-						<a href="#">
+						<a href="" name="Perfil"> 
 							<h3>Tus Pedidos</h3>
 						</a>
 						<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
 					</li>
-					<li>
-						<a href="#">
-							<h3>Volver</h3>
-						</a>
-					</li>
 				</ul>
 			</section>
-
 			<!-- Actions -->
 			<section>
 				<ul class="actions stacked">
-					<li><a href="/Login" class="button large fit">Iniciar Sesión</a></li>
+					<li>
+						{{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'button large fit'))}}					
+					</li>
 				</ul>
 			</section>
-
 		</section>
 
 
-
 			@yield('cuerpo_seccion')
-			
-			
+		
 		<div>
 
 			@yield('zonaInferior')
