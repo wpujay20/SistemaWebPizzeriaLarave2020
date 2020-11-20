@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
+use App\pizza;
+use App\tipo_pizza;
 
 class CatalogoPizzasController extends Controller
 {
@@ -13,7 +17,14 @@ class CatalogoPizzasController extends Controller
      */
     public function index()
     {
-        return view('vistas.CatalogoPizzas');
+         $listaPizzas = DB::table('pizzas')
+        ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
+        ->select('tipo_pizzas.*', 'pizzas.*')
+        ->get();
+
+        $listaTiposPizzas = tipo_pizza::all();
+
+        return view('vistas.CatalogoPizzas',compact("listaPizzas"),  compact("listaTiposPizzas"));
     }
 
     /**

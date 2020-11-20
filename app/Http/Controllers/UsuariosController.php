@@ -21,7 +21,7 @@ class UsuariosController extends Controller
     public function index()
     {
         /*$listaUsuarios = usuario::all();    */
-        
+
         $listatipo_usuario = tipo_usuario::all(); /**LISTA PARA EL FORM */
 
         $listaUsuarios = DB::table('tipo_usuarios')
@@ -85,6 +85,16 @@ class UsuariosController extends Controller
         //
     }
 
+     public function validarUsuario($user,$pass)
+    {
+        $estado=0;
+
+
+
+        
+        return $estado;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,8 +103,8 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        
-    
+
+
         $usuario_edit = DB::table('tipo_usuarios')
         ->join('usuarios', 'usuarios.tipousu_id', '=', 'tipo_usuarios.tipousu_id')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
@@ -106,7 +116,7 @@ class UsuariosController extends Controller
 
         //echo '<pre>' . var_export($usuario_edit, true) . '</pre>';
         //$usuario_edit = persona::findOrFail($id);
-        
+
         return view("mant_usuarios.usuarioEdit", compact("usuario_edit"), compact("listatipo_usuario"));
     }
 
@@ -121,7 +131,7 @@ class UsuariosController extends Controller
     {
 
        // echo '<pre>' . var_export($request, true) . '</pre>';
-    
+
         DB::table('usuarios')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
         ->where('personas.persona_id', $id)
@@ -140,7 +150,7 @@ class UsuariosController extends Controller
 /*
     DB::table('attributes as a')
     ->join('catalog as c', 'a.parent_id', '=', 'c.id')
-    ->update([ 'a.key' => DB::raw("`c`.`left_key`") ]); 
+    ->update([ 'a.key' => DB::raw("`c`.`left_key`") ]);
 */
 
     }

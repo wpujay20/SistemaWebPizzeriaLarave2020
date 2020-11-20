@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    
+
     <title>Login</title>
     <link rel="stylesheet" href="{{asset('css/login.css')}}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -18,22 +18,22 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
-    
+
             <!-- Icon -->
             <div class="fadeIn first">
             <img src="{{asset('images/Captura.PNG')}}" width="150px" height="auto" style="padding: 10px"/>
             </div>
-    
+
             <!-- Login Form -->
             <form>
             <input type="text" id="correo" class="fadeIn second" name="correo" placeholder="Correo Electronico">
             <input type="text" id="contrasena" class="fadeIn third" name="contrasena" placeholder="Contraseña">
             <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
-    
+
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                {{link_to('PerfilDeUsuario', $title = "Registrate", $attributes = array("class"=>"fadeIn fourth"), $secure = null)}}	&nbsp;&nbsp;&nbsp;			
+                {{link_to('PerfilDeUsuario', $title = "Registrate", $attributes = array("class"=>"fadeIn fourth"), $secure = null)}}	&nbsp;&nbsp;&nbsp;
                 <a class="fadeIn fourth" href="index_buena_pizza">Volver al Menu</a>
             </div>
 

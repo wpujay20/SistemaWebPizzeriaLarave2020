@@ -40,19 +40,15 @@ Route::get('/login', function () {
 
 
 
-
-
-
 /*
 Route::get('/insertar', function () {
     $tipoUsuario = new tipo_usuario();
     $tipoUsuario->tipo_nombre = "Administrador";
     $tipoUsuario->tipo_descripcion = "Es el que se encarga de gestionar la informacion del sistema";
     $tipoUsuario->save();
-    
+
 });
 */
-
 
 Route::resource('/personal', PersonalEntregaController::class);
 Route::resource('/mantenimientos', MantenimientoController::class);
@@ -64,6 +60,9 @@ Route::resource('/ventas_delivery', VentasController::class);
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
+
+Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
+
 
 
 

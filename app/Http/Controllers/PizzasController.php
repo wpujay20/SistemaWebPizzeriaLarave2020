@@ -56,19 +56,19 @@ class PizzasController extends Controller
             $array = array();
 
              /*obtenemos los datos de la imagen (archivo) */
-            
+
                 if($archivo = $request->file('pizza_img')){
-                    
+
                     $tipoArchivo =  $archivo->getClientMimeType();
 
                     if($tipoArchivo == 'image/png' || $tipoArchivo == 'image/jpeg' || $tipoArchivo == 'image/jpg'){
 
                         /*NOMBRE DE LA IMAGEN QUE LLEGO*/
-                        $nombre = $archivo->getClientOriginalName(); 
-                    
+                        $nombre = $archivo->getClientOriginalName();
+
                         /*Movimiento de la imagen a la carpeta public/images/  */
                         $archivo->move('images', $nombre);
-                    
+
                         /*Almacenamos la ruta para enviarla */
                         $entrada['pizza_img'] = $nombre;
                         echo $nombre;
@@ -82,7 +82,7 @@ class PizzasController extends Controller
 
                    /*Enviamos los datos a la BBDD */
                     pizza::create($entrada);
-        
+
             return redirect("pizzas");
         }
 
@@ -117,7 +117,7 @@ class PizzasController extends Controller
         echo '<pre>' . print_r($listaTiposPizzas, true) . '</pre>';*/
 
         return view("mant_pizzas.PizzasEdit", compact("PizzaEdit"), compact("listaTiposPizzas"));
-    
+
     }
 
     /**
@@ -130,20 +130,20 @@ class PizzasController extends Controller
     public function update(Request $request, $id)
     {
         $entrada = $request->all();
-        
+
                 if($archivo = $request->file('pizza_img')){
-                    
+
                     $tipoArchivo =  $archivo->getClientMimeType();
                     if($tipoArchivo == 'image/png' || $tipoArchivo == 'image/jpeg' || $tipoArchivo == 'image/jpg'){
-        
-                        $nombre = $archivo->getClientOriginalName(); 
+
+                        $nombre = $archivo->getClientOriginalName();
                         $archivo->move('images', $nombre);
                         $entrada['pizza_img'] = $nombre;
                     }
                     else{
                         return redirect("pizzas");
                     }
-                } 
+                }
 
                 if($archivo==null || $archivo = "" ){
                     $entrada['pizza_img'] = "Sin Imagen";
@@ -171,7 +171,7 @@ class PizzasController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $pizza = pizza::findOrFail($id);
         $pizza->delete();
         return redirect("pizzas");
