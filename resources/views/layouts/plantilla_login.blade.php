@@ -25,11 +25,24 @@
             </div>
 
             <!-- Login Form -->
-            <form>
-            <input type="text" id="correo" class="fadeIn second" name="correo" placeholder="Correo Electronico">
-            <input type="text" id="contrasena" class="fadeIn third" name="contrasena" placeholder="Contraseña">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+            <form method="POST" action="{{ url('/login') }}">
+                {{ csrf_field() }}
+                <input type="text" id="correo" class="fadeIn second" name="username" placeholder="Correo Electronico">                
+                <input type="text" id="contrasena" class="fadeIn third" name="password" placeholder="Contraseña">               
+                <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
+            <div>
+                @if ($errors->has('username'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('username') }}</strong>
+                    </span>
+                @endif
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">

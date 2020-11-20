@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\tipo_usuario;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +17,10 @@ use App\tipo_usuario;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::get('/login', function () {
     return view('vista_login');
-});
+});*/
 
 
 Route::get('/index_buena_pizza', function () {
@@ -34,10 +33,19 @@ Route::get('/promociones', function () {
     return view('vistas.Promociones');
 });
 
-Route::get('/login', function () {
-    return view('vistas.vista_login');
-});
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function() {  
+    /*
+    Rutas de administración de personal
+    */
+    Route::get('personal',                              ['middleware' => [], 'as' => 'personal.index',      'uses' => 'PersonalEntregaController@index' ]);    
+    Route::post('personal/create',                      ['middleware' => [], 'as' => 'personal.store',      'uses' => 'PersonalEntregaController@store' ]);
+    Route::get('personal/edit/{personalEntrega}',       ['middleware' => [], 'as' => 'personal.edit',       'uses' => 'PersonalEntregaController@edit' ]);
+    Route::put('personal/actualizar/{personalEntrega}', ['middleware' => [], 'as' => 'personal.update',     'uses' => 'PersonalEntregaController@update' ]);    
+});  
 
 
 /*
@@ -49,14 +57,11 @@ Route::get('/insertar', function () {
 
 });
 */
-
-Route::resource('/personal', PersonalEntregaController::class);
 Route::resource('/mantenimientos', MantenimientoController::class);
 Route::resource('/usuarios', UsuariosController::class);
 Route::resource('/pizzas', PizzasController::class);
 Route::resource('/tipo_pizzas', tipo_pizzasController::class);
 Route::resource('/ventas_delivery', VentasController::class);
-
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);

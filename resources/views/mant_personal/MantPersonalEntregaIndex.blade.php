@@ -32,9 +32,9 @@ Personal de Entrega
             <td>{{$i->peen_nombres}}</td>
             <td>{{$i->peen_apellidos}}</td>
             <td>{{$i->peen_telefono}}</td>
-            <td>{{$i->nombre_estado}}</td>
+            <td>{{$i->estado->nombre_estado}}</td>
 
-            <td style="text-align:center"> <a href="{{route("personal.edit", $i->personalentrega_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
+            <td style="text-align:center"> <a href="{{route('personal.edit',$i->personalentrega_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
 
             <td style="text-align:center">
                 {!! Form::open(['action' => ['UsuariosController@destroy', $i->personalentrega_id]]) !!}
@@ -60,8 +60,7 @@ Personal de Entrega
     <div class="modal-dialog modal-lg">
 
 
-        <form method="post" action="personal">
-            {{csrf_field()}}
+            {!! Form::open([ 'route' => ['personal.store'], 'method'=>'POST' ]) !!}
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,7 +72,7 @@ Personal de Entrega
                 <div class="modal-body">
                             <div class="form-group">
                                 <label>Estado Actual</label>
-                                <select class="form-control" name="estado">
+                                <select class="form-control" name="estado_id">
                                     @foreach ($listaEstados as $key)
                                         <option value="{{$key->estadopersonal_id}}"> {{$key->nombre_estado}} </option>
                                     @endforeach
@@ -82,15 +81,15 @@ Personal de Entrega
                             </div>
                             <div class="form-group">
                                 <label > Nombres </label>
-                                <input name="nombres" type="text" class="form-control"aria-describedby="emailHelp" placeholder="Ingresar Nombre">
+                                <input name="peen_nombres" type="text" class="form-control"aria-describedby="emailHelp" placeholder="Ingresar Nombre">
                             </div>
                             <div class="form-group">
                                 <label>Apellidos</label>
-                                <input name="apellidos" type="text" class="form-control" placeholder="Ingresar Apellidos">
+                                <input name="peen_apellidos" type="text" class="form-control" placeholder="Ingresar Apellidos">
                             </div>
                             <div class="form-group">
                                 <label > Telefono </label>
-                                <input name="telefono" type="text" class="form-control"placeholder="Ingresar Telefono">
+                                <input name="peen_telefono" type="text" class="form-control"placeholder="Ingresar Telefono">
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -101,7 +100,7 @@ Personal de Entrega
                 
                     </div>
             </div>
-        </form>
+            {!! Form::close() !!}  
         
     </div>
 </div>
