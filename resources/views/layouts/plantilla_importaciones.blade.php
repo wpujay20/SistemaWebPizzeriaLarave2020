@@ -17,7 +17,9 @@
 			<link rel="shortcut icon" href="{{asset('images/buena_pizza_logo.jpg')}}" >
 
 			<link rel="stylesheet" href="{{asset('css/main.css')}}"/>
-			<link rel="stylesheet" href="{{asset('css/index_estilos.css')}}"/>
+            <link rel="stylesheet" href="{{asset('css/index_estilos.css')}}"/>
+			<link rel="stylesheet" href="{{asset('css/catalogo.css')}}"/>
+
 
 		@yield('importar_css_arriba')
 		@yield('importar_js_arriba')

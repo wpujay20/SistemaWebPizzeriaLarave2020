@@ -16,7 +16,7 @@ use App\tipo_usuario;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vistas.index');
 });
 
 Route::get('/login', function () {
@@ -61,7 +61,7 @@ Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 
-Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
+// Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 
 
 
