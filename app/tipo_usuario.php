@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class tipo_usuario extends Model
+class tipo_usuario extends Entity
 {
-    //
+    protected $fillable = ["tipousu_id","tipo_nombre","tipo_descripcion"]; 
 }

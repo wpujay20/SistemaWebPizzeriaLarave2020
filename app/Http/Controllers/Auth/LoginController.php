@@ -71,4 +71,10 @@ class LoginController extends Controller
             return redirect('/login');
     }
     
+    public function redirectTo()
+    {  
+        return auth()->user()->is_administrador ? '/mantenimientos' : '/';
+            
+    }
+    
 }
