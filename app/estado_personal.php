@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class estado_personal extends Model
+class estado_personal extends Entity
 {
-    //
+    protected $primaryKey = 'estadopersonal_id';
+    protected $fillable = ["nombre_estado"]; 
 }

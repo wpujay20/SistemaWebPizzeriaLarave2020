@@ -24,9 +24,10 @@ class CreatePersonalRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombres' => 'required',
-            'apellidos' =>'required',
-            'telefono'=>'required'
+            'estado_id' => 'required',
+            'peen_nombres' =>'required',
+            'peen_apellidos'=>'required',
+            'peen_telefono'=>'required',
         ];
     }
 

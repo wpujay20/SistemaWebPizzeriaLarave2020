@@ -104,11 +104,12 @@
 				</header>
 
 				<body>
-					<form action="/Perfil">
+					<form action="/Perfil" method="POST" action="{{ url('/login') }}">
+                                                {{ csrf_field() }}
 						<label for="fname">Correo electronico:</label>
-						<input type="text" id="fname" name="fname"><br>
+						<input type="text" id="fname" name="usu_correo"><br>
 						<label for="lname">Contraseña:</label>
-						<input type="text" id="lname" name="lname">
+						<input type="text" id="lname" name="usu_pass">
 						<br>
 						<button type="submit" >Iniciar sesión</button><br><br>
 						<h1>¿No cuentas con una cuenta?<a href="/Registro"> REGISTRARSE</a></h1>
