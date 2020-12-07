@@ -85,14 +85,30 @@ class UsuariosController extends Controller
         //
     }
 
-     public function validarUsuario($user,$pass)
+     public function validarUsuario()
     {
-        $estado=0;
+        extract($_REQUEST);
+
+
+        // $val = usuario::select('SELECT usuarios.tipousu_id from usuarios WHERE usuarios.usu_correo ='.$username.' and and usuarios.usu_pass= '.$password.'; ');
+
+
+        if($val==2){
+            echo "Clientes";
+        }
+
+        if($val==3){
+            echo "Administrador";
+        }
 
 
 
-        
-        return $estado;
+        return "validar usuario!!";
+    }
+
+    public function verificarUser($user,$pass){
+
+
     }
 
     /**

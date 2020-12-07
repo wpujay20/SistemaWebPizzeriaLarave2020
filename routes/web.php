@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 use App\tipo_usuario;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,14 @@ use App\tipo_usuario;
 */
 
 Route::get('/', function () {
-    return view('vistas.index');
+     $lista = date('Y-m-d');
+    return view('vistas.index', compact("lista"));
 });
-/*
+
 Route::get('/login', function () {
-    return view('vista_login');
-});*/
+   return view('layouts.plantilla_login');
+});
+Route::get('/validarLogin','UsuariosController@validarUsuario');
 
 
 Route::get('/index_buena_pizza', function () {
@@ -35,17 +39,17 @@ Route::get('/promociones', function () {
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Auth::routes();
+//Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {  
+Route::group(['middleware' => ['auth']], function() {
     /*
     Rutas de administración de personal
     */
-    Route::get('personal',                              ['middleware' => [], 'as' => 'personal.index',      'uses' => 'PersonalEntregaController@index' ]);    
+    Route::get('personal',                              ['middleware' => [], 'as' => 'personal.index',      'uses' => 'PersonalEntregaController@index' ]);
     Route::post('personal/create',                      ['middleware' => [], 'as' => 'personal.store',      'uses' => 'PersonalEntregaController@store' ]);
     Route::get('personal/edit/{personalEntrega}',       ['middleware' => [], 'as' => 'personal.edit',       'uses' => 'PersonalEntregaController@edit' ]);
-    Route::put('personal/actualizar/{personalEntrega}', ['middleware' => [], 'as' => 'personal.update',     'uses' => 'PersonalEntregaController@update' ]);    
-});  
+    Route::put('personal/actualizar/{personalEntrega}', ['middleware' => [], 'as' => 'personal.update',     'uses' => 'PersonalEntregaController@update' ]);
+});
 
 
 /*
@@ -66,9 +70,19 @@ Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 
+
+
 // Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 
 
 
 
 
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

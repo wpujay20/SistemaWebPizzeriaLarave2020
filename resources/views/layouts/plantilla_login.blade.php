@@ -25,10 +25,10 @@
             </div>
 
             <!-- Login Form -->
-            <form method="POST" action="{{ url('/login') }}">
+        <form method="GET" action="/validarLogin">
                 {{ csrf_field() }}
-                <input type="text" id="correo" class="fadeIn second" name="username" placeholder="Correo Electronico">                
-                <input type="text" id="contrasena" class="fadeIn third" name="password" placeholder="Contraseña">               
+                <input type="text" id="correo" class="fadeIn second" name="username" placeholder="Correo Electronico">
+                <input type="text" id="contrasena" class="fadeIn third" name="password" placeholder="Contraseña">
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
             <div>

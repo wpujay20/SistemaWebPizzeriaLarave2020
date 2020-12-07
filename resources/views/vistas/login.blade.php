@@ -1,3 +1,5 @@
+
+@extends('../layouts/plantilla_importaciones')
 <!DOCTYPE HTML>
 
 <html>
@@ -104,12 +106,12 @@
 				</header>
 
 				<body>
-					<form action="/Perfil" method="POST" action="{{ url('/login') }}">
+					<form  method="POST" action="/login">
                                                 {{ csrf_field() }}
 						<label for="fname">Correo electronico:</label>
-						<input type="text" id="fname" name="usu_correo"><br>
+						<input type="email" id="fname" name="usu_correo" required><br>
 						<label for="lname">Contraseña:</label>
-						<input type="text" id="lname" name="usu_pass">
+						<input type="password" id="lname" name="usu_pass" required>
 						<br>
 						<button type="submit" >Iniciar sesión</button><br><br>
 						<h1>¿No cuentas con una cuenta?<a href="/Registro"> REGISTRARSE</a></h1>
