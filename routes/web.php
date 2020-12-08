@@ -37,6 +37,10 @@ Route::get('/promociones', function () {
     return view('vistas.Promociones');
 });
 
+// Route::post('/CatalogoPizzasDetalle/{id}', function(){
+//     return view('vistas.CatalogoPizzasDetalle');
+// });
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Auth::routes();

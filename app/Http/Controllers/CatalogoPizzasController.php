@@ -56,7 +56,8 @@ class CatalogoPizzasController extends Controller
      */
     public function show($id)
     {
-        //
+        $detallepizza= pizza::findOrFail($id);
+        return view('/vistas.CatalogoPizzasDetalle', compact('detallepizza'));
     }
 
     /**

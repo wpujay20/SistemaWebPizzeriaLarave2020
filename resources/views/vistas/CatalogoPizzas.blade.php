@@ -41,7 +41,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$item->pizza_nombre}}</h5>
                                 <p class="card-text">{{$item->pizza_descripcion}}.</p>
-                                <a href="#" class="btn btn-warning">Visualizar</a>
+							<a href="{{ route('CatalogoPizzas.show', $item->pizza_id) }}" class="btn btn-warning">Visualizar</a>
                             </div>
                         </div>
                     </div>
