@@ -25,12 +25,7 @@
 
 			<!-- Post -->
 			<article class="post">
-				<header>
-					<div class="title">
-						<h2><a href="#">CATÁLOGO DE PIZZAS</a></h2>
-						<p>Encuentre una gran y deliciosa variedad de sabores</p>
-					</div>
-				</header>
+			
 
 				<div class="container" >
                     <div class="row "  >
@@ -44,6 +39,7 @@
                                 <h3 class="card-title">{{$detallepizza->pizza_nombre}}</h3>
 								<p class="card-text">{{$detallepizza->pizza_descripcion}}.</p>
 								<p class="card-text">Precio : S/.{{$detallepizza->pizza_precio}}</p>
+								
 								<p class="card-text">Cantidad: 
 									<select style=" width: 5rem">
 										<option>1</option>
@@ -64,11 +60,32 @@
 				</div>
 				
 				<br>
+				<header>
+					<div class="title">
+						<h2><a href="#">Tambien te puede interesar...</a></h2>
+						{{-- <p>Encuentre una gran y deliciosa variedad de sabores</p> --}}
+					</div>
+				</header>
 				<footer>
-					<ul class="stats">
-						<li><a href="#">Anterior</a></li>
-						<li><a href="#" class="icon solid fa-comment">Siguiente</a></li>
-					</ul>
+	
+					<div class="container" >
+						<div class="row "  >
+							@foreach ($listaPizzas as $item)
+							<div  class="col-md-3" style="display:inline;margin:5px;"  >
+						   <div class="card" style="width: 15rem;" style="text-align: center; margin:2px auto">
+							<img src="{{asset('images/'.$item->pizza_img .'') }} " class="card-img-top" alt="...">
+								<div class="card-body">
+									<h5 class="card-title">{{$item->pizza_nombre}}</h5>
+									{{-- <p class="card-text">{{$item->pizza_descripcion}}.</p> --}}
+									<p class="card-text">Tamaño: {{$item->tpi_tamano}}</p>
+									<p class="card-text">Precio: {{$item->pizza_precio}}</p>
+								<a href="{{ route('CatalogoPizzas.show', $item->pizza_id) }}" class="btn btn-warning">Visualizar</a>
+								</div>
+							</div>
+						</div>
+						@endforeach
+					</div>
+					</div>
 				</footer>
 
 			</article>

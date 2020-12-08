@@ -20,6 +20,7 @@ class CatalogoPizzasController extends Controller
          $listaPizzas = DB::table('pizzas')
         ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
         ->select('tipo_pizzas.*', 'pizzas.*')
+        ->orderBy('pizzas.pizza_id')
         ->get();
 
         $listaTiposPizzas = tipo_pizza::all();
@@ -57,7 +58,17 @@ class CatalogoPizzasController extends Controller
     public function show($id)
     {
         $detallepizza= pizza::findOrFail($id);
-        return view('/vistas.CatalogoPizzasDetalle', compact('detallepizza'));
+
+        $listaPizzas = DB::table('pizzas')
+        ->join('tipo_pizzas', 'pizzas.tipopizza_id', '=', 'tipo_pizzas.tipopizza_id')
+        ->select('tipo_pizzas.*', 'pizzas.*')
+        ->orderBy('pizzas.pizza_id')
+        ->get();
+
+        $listaTiposPizzas = tipo_pizza::all();
+
+
+        return view('/vistas.CatalogoPizzasDetalle', compact('detallepizza'), compact('listaPizzas'), compact('listaTiposPizzas'));
     }
 
     /**

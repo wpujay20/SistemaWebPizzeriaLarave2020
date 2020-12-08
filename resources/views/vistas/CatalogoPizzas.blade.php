@@ -40,7 +40,9 @@
                         <img src="{{asset('images/'.$item->pizza_img .'') }} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$item->pizza_nombre}}</h5>
-                                <p class="card-text">{{$item->pizza_descripcion}}.</p>
+								{{-- <p class="card-text">{{$item->pizza_descripcion}}.</p> --}}
+								<p class="card-text">Tamaño: {{$item->tpi_tamano}}</p>
+								<p class="card-text">Precio: {{$item->pizza_precio}}</p>
 							<a href="{{ route('CatalogoPizzas.show', $item->pizza_id) }}" class="btn btn-warning">Visualizar</a>
                             </div>
                         </div>
