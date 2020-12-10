@@ -2,8 +2,8 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 trait ConfirmsPasswords
 {
@@ -12,7 +12,7 @@ trait ConfirmsPasswords
     /**
      * Display the password confirmation view.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function showConfirmForm()
     {
@@ -32,7 +32,7 @@ trait ConfirmsPasswords
         $this->resetPasswordConfirmationTimeout($request);
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 204)
+                    ? new Response('', 204)
                     : redirect()->intended($this->redirectPath());
     }
 

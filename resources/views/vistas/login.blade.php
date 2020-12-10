@@ -104,14 +104,13 @@
 								src="images/Captura.PNG" alt="" /></a>
 					</div>
 				</header>
-
 				<body>
-					<form  method="POST" action="/login">
+					<form  method="POST" action="/validarLogin">
                                                 {{ csrf_field() }}
 						<label for="fname">Correo electronico:</label>
 						<input type="email" id="fname" name="usu_correo" required><br>
-						<label for="lname">Contraseña:</label>
-						<input type="password" id="lname" name="usu_pass" required>
+						<label for="name">Contraseña:</label>
+						<input type="password" id="usu_pass" name="usu_pass" required>
 						<br>
 						<button type="submit" >Iniciar sesión</button><br><br>
 						<h1>¿No cuentas con una cuenta?<a href="/Registro"> REGISTRARSE</a></h1>

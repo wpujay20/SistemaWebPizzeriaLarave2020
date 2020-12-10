@@ -9,7 +9,7 @@
 	@endsection
 
 	@section('importar_css_arriba')
-		
+
 	@endsection
 
 </head>
@@ -18,7 +18,7 @@
 
 	@section('cuerpo_seccion')
 
-	
+
 
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -56,20 +56,20 @@
 								<tr>
 									<tr>
 									<td>{{Form::label('Correo')}}</td>
-									<td>{{Form::text('usu_correo', $Perfil[0]->usu_correo,['class'=>'form-control'])}} </td>
+									<td>{{Form::text('email', $Perfil[0]->email,['class'=>'form-control'])}} </td>
 								</tr>
 									<td>{{Form::label('Contraseña')}}</td>
-									<td>{{Form::text('usu_pass', $Perfil[0]->usu_pass,['class'=>'form-control'])}} </td>
+									<td>{{Form::text('password', $Perfil[0]->password,['class'=>'form-control'])}} </td>
 								</tr>
-	
+
 								<tr>
 									<td colspan="2" align="center" class="botones">
-										{{link_to('index_buena_pizza', $title = "Regresar", $attributes = array("class"=>"button medium"), $secure = null)}}					
+										{{link_to('index_buena_pizza', $title = "Regresar", $attributes = array("class"=>"button medium"), $secure = null)}}
 										{{Form::submit('Modificar Perfil')}}
-									</td>   
+									</td>
 								</tr>
 						</table>
-						{!! Form::close() !!}	
+						{!! Form::close() !!}
 			</article>
 		</div>
 	</div>
