@@ -12,7 +12,7 @@ trait SendsPasswordResetEmails
     /**
      * Display the form to request a password reset link.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function showLinkRequestForm()
     {
@@ -82,9 +82,7 @@ trait SendsPasswordResetEmails
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUsuariosRequest;
-
+use  Illuminate\Support\Facades\Auth;
 use App\usuario;
 use App\tipo_usuario;
 use App\persona;
@@ -85,28 +85,35 @@ class UsuariosController extends Controller
         //
     }
 
-     public function validarUsuario()
+
+     public function validarUsuario(Request $request)
     {
         extract($_REQUEST);
+       // $user = usuario::whereRaw("usu_correo ='".$usu_correo."' and usu_pass ='".$usu_pass."'")->get('tipousu_id');
 
+       $usuario= new usuario();
 
-        // $val = usuario::select('SELECT usuarios.tipousu_id from usuarios WHERE usuarios.usu_correo ='.$username.' and and usuarios.usu_pass= '.$password.'; ');
+       $user = usuario::whereRaw("usu_correo ='".$usu_correo."' and usu_pass ='".$usu_pass."'")->get()->first();
 
+       if($user['tipousu_id']==3){
+            //Auth::login();
+           $ruta="mantenimientos.mant_index";
+       }else{
+           Auth::login($user['usu_correo']);
+           Auth::guard($user['usu_correo']);
 
-        if($val==2){
-            echo "Clientes";
-        }
+            $ruta="vistas.index";
 
-        if($val==3){
-            echo "Administrador";
-        }
+        return redirect('/');
+       }
 
+       // var_dump($user);
 
-
-        return "validar usuario!!";
+        return  view($ruta);
     }
 
-    public function verificarUser($user,$pass){
+    public function verificarUser(Request $request, $user,$pass){
+
 
 
     }

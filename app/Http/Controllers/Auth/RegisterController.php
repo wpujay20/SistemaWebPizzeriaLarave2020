@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\usuario;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\tipo_usuario;
+use App\persona;
 class RegisterController extends Controller
 {
     /*
@@ -50,7 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+
             'name' => ['required', 'string', 'max:255'],
+            'apellido' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'int', 'min:8'],
+            'telefono' => ['required', 'int', 'min:9'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +69,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $persona = new persona();
+        $persona->per_nombres = $data['name'];
+        $persona->per_apellidos =  $data['apellido'];
+        $persona->per_dni =  $data['dni'];
+        $persona->per_telefono =  $data['telefono'];
+        $persona->save();
+
+        $ultimoId = persona::latest('persona_id')->first();
+        $Id=  $ultimoId["persona_id"];
+
+
+        return usuario::create([
+            'persona_id'=>$Id,
+            'tipousu_id'=>2,
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['password'],),
+            'usu_estado'=>'habilitado',
         ]);
     }
 }

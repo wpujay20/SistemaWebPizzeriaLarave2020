@@ -31,10 +31,10 @@ Mantenimientos Pizzeria "La Buena Pizza"
     <tbody>
         @foreach ($listaUsuarios as $i)
             <tr>
-            <td>{{$i->usuario_id}}</td>
+            <td>{{$i->id}}</td>
             <td>{{$i->tipo_nombre}}</td>
-            <td>{{$i->usu_correo}}</td>
-            <td>{{$i->usu_pass}}</td>
+            <td>{{$i->email}}</td>
+            <td>{{$i->password}}</td>
             <td>{{$i->usu_estado}}</td>
             <td>{{$i->per_nombres}}</td>
             <td>{{$i->per_apellidos}}</td>
@@ -48,7 +48,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
 
                     {{csrf_field()}}
                     {{method_field('DELETE') }}
-                    
+
                     {{Form::submit('Eliminar',['class'=>'btn btn-danger'])}}
                 {!! Form::close() !!}
             </td>
@@ -59,7 +59,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
 
 
 @section('zonaBotones')
-    
+
 <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">Crear Nuevo Usuario</button>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -83,7 +83,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
                                     @foreach ($listatipo_usuario as $key)
                                         <option value="{{$key->tipousu_id}}"> {{$key->tipo_nombre}} </option>
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -110,14 +110,14 @@ Mantenimientos Pizzeria "La Buena Pizza"
                                 <label > Telefono </label>
                                 <input name="telefono" type="text" class="form-control"placeholder="Ingresar Telefono">
                             </div>
-                
+
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" value="Crear"/>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    
+
                     </div>
-                
+
                     </div>
             </div>
         </form>

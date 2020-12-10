@@ -9,7 +9,7 @@
 	@endsection
 
 	@section('importar_css_arriba')
-		
+
 	@endsection
 
 </head>
@@ -24,6 +24,7 @@
 
 		<!-- Main -->
 		<div id="main">
+            
 
 			<!-- Post -->
 			<article class="post">
@@ -41,7 +42,7 @@
 				<footer>
 					<ul class="actions">
 						<li>
-							{{link_to('CatalogoPizzas', $title = "Ver en Catalogo", $attributes = array("class"=>"button large"), $secure = null)}}					
+							{{link_to('CatalogoPizzas', $title = "Ver en Catalogo", $attributes = array("class"=>"button large"), $secure = null)}}
 						</li>
 					</ul>
 				</footer>
@@ -57,7 +58,7 @@
 						<h2><a href="">La Clasica</a></h2>
 						<p>Una excelente combinacion de sabores e ingredientes que se mantendrá por siempre</p>
 					</div>
-	
+
 				</header>
 				<a href="" class="image featured"><img src="{{asset('images/pic02.jpg')}}" alt="" /></a>
 				<footer>
@@ -70,7 +71,7 @@
 
 
 			<!-- Pagination -->
-	
+
 		</div>
 
 		<!-- Sidebar -->
@@ -93,7 +94,7 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="/Pizza Famosa">Americana</a></h3>
-							
+
 						</header>
 						<a href="" class="image"><img src="{{asset('images/pic04.jpg')}}" alt="" /></a>
 					</article>
@@ -102,7 +103,7 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="/Pizza Famosa">Italiana</a></h3>
-							
+
 						</header>
 						<a href="" class="image"><img src="{{asset('images/pic05.jpg')}}" alt="" /></a>
 					</article>
@@ -111,7 +112,7 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="/Pizza Famosa">Pizzas Medianas</a></h3>
-						
+
 						</header>
 						<a href="" class="image"><img src="{{asset('images/pic06.jpg')}}" alt="" /></a>
 					</article>
@@ -120,7 +121,7 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="/Pizza Famosa">Pizzas Familiares</a></h3>
-							
+
 						</header>
 						<a href="" class="image"><img src="{{asset('images/pic07.jpg')}}" alt="" /></a>
 					</article>
@@ -192,6 +193,6 @@
 @section('zonaInferior')
 
 @endsection
-			
+
 
 </html>

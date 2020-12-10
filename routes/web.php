@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\UsuariosController;
+
 use Illuminate\Support\Facades\Route;
 use App\tipo_usuario;
+use App\usuario;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,10 +23,11 @@ Route::get('/', function () {
     return view('vistas.index', compact("lista"));
 });
 
-Route::get('/login', function () {
-   return view('layouts.plantilla_login');
-});
-Route::get('/validarLogin','UsuariosController@validarUsuario');
+// Route::get('/login', function () {
+//    return view('vistas.login');
+// });
+
+//Route::POST('/validarLogin','UsuariosController@validarUsuario')->name("usuarios.validar");
 
 
 Route::get('/index_buena_pizza', function () {
@@ -44,19 +47,19 @@ Route::post('/cart-removeitem',  'CarroComprasController@removeitem')->name('car
 //     return view('vistas.CatalogoPizzasDetalle');
 // });
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-//Auth::routes();
+// Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
-    /*
-    Rutas de administración de personal
-    */
-    Route::get('personal',                              ['middleware' => [], 'as' => 'personal.index',      'uses' => 'PersonalEntregaController@index' ]);
-    Route::post('personal/create',                      ['middleware' => [], 'as' => 'personal.store',      'uses' => 'PersonalEntregaController@store' ]);
-    Route::get('personal/edit/{personalEntrega}',       ['middleware' => [], 'as' => 'personal.edit',       'uses' => 'PersonalEntregaController@edit' ]);
-    Route::put('personal/actualizar/{personalEntrega}', ['middleware' => [], 'as' => 'personal.update',     'uses' => 'PersonalEntregaController@update' ]);
-});
+// Route::group(['middleware' => ['auth']], function() {
+//     /*
+//     Rutas de administración de personal
+//     */
+//     Route::get('personal',                              ['middleware' => [], 'as' => 'personal.index',      'uses' => 'PersonalEntregaController@index' ]);
+//     Route::post('personal/create',                      ['middleware' => [], 'as' => 'personal.store',      'uses' => 'PersonalEntregaController@store' ]);
+//     Route::get('personal/edit/{personalEntrega}',       ['middleware' => [], 'as' => 'personal.edit',       'uses' => 'PersonalEntregaController@edit' ]);
+//     Route::put('personal/actualizar/{personalEntrega}', ['middleware' => [], 'as' => 'personal.update',     'uses' => 'PersonalEntregaController@update' ]);
+// });
 
 
 /*
@@ -76,6 +79,8 @@ Route::resource('/ventas_delivery', VentasController::class);
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
+Route::resource('/personal', PersonalEntregaController::class);
+
 
 
 
@@ -92,4 +97,8 @@ Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 
 // Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

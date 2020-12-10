@@ -22,7 +22,7 @@ class PerfilDeUsuarioController extends Controller
      */
     public function index()
     {
-        
+
         return view("vistas.PerfilUsuario.crearUsuario");
     }
 
@@ -112,8 +112,8 @@ class PerfilDeUsuarioController extends Controller
                             'per_apellidos' =>$request->input("per_apellidos"),
                             'per_dni' =>$request->input("per_dni"),
                             'per_telefono' =>$request->input("per_telefono"),
-                            'usu_correo' =>$request->input("usu_correo"),
-                            'usu_pass' =>$request->input("usu_pass")]);
+                            'usu_correo' =>$request->input("email"),
+                            'usu_pass' =>$request->input("password")]);
                 return redirect("PerfilDeUsuario/$id");
     }
 
