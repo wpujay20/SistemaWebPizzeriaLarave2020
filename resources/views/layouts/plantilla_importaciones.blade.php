@@ -41,6 +41,14 @@
 						<li>{{link_to('promociones', $title = "Promociones")}}</li>
 					</ul>
 				</nav>
+				<nav class="links">
+					<ul>
+                    <li>@if (count(Cart::getContent()))
+						{{count(Cart::getContent())}}
+					@endif</li>
+					</ul>
+				</nav>
+				
 				<nav class="main">
 					<ul>
 						<li class="menu">
@@ -48,6 +56,8 @@
 						</li>
 					</ul>
 				</nav>
+
+
 			</header>
 
 
@@ -68,7 +78,40 @@
 						<a href="" name="Perfil">
 							<h3>Tus Pedidos</h3>
 						</a>
-						<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
+						
+						
+							@if (count(Cart::getContent())>0)
+							<p><span>
+							<table width="50%">
+								<thead>
+									<th></th>
+									<th>Pizza</th>
+									<th>Cantidad</th>
+									<th>Precio</th>
+									<th></th>
+								</thead>
+								<tbody>
+									@foreach (Cart::getContent() as $item)
+									<tr>
+										<td><img width="50px" src="{{asset('images/' . $item->attributes['pizza_img'] .'')}}"></td>
+										<td>{{$item->name}}</td>
+										<td>{{$item->quantity}}</td>
+										<td>{{$item->price*$item->quantity}}</td>
+										<td>
+											<form action="{{route('cart.removeitem')}}" method="POST">
+												@csrf
+											<input type="hidden" name="pizza_id" value="{{$item->id}}">
+											<button type="submit" class="btn button">x</button>
+											</form>
+										</td>
+									</tr>
+									@endforeach
+								<tbody>
+							</table>
+							</span></p>
+							@else
+							<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
+						@endif
 					</li>
 				</ul>
 			</section>

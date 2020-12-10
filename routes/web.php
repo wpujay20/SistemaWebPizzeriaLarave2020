@@ -37,6 +37,9 @@ Route::get('/promociones', function () {
     return view('vistas.Promociones');
 });
 
+Route::post('/cart-add', 'CarroComprasController@add')->name('cart.add');
+Route::get('/cart-clear', 'CarroComprasController@clear')->name('cart.clear');
+Route::post('/cart-removeitem',  'CarroComprasController@removeitem')->name('cart.removeitem');
 // Route::post('/CatalogoPizzasDetalle/{id}', function(){
 //     return view('vistas.CatalogoPizzasDetalle');
 // });

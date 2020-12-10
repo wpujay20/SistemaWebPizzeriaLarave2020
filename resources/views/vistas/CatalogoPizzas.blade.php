@@ -44,7 +44,8 @@
 								<p class="card-text">Tamaño: {{$item->tpi_tamano}}</p>
 								<p class="card-text">Precio: {{$item->pizza_precio}}</p>
 							<a href="{{ route('CatalogoPizzas.show', $item->pizza_id) }}" class="btn btn-warning">Visualizar</a>
-                            </div>
+								
+						</div>
                         </div>
                     </div>
                     @endforeach
