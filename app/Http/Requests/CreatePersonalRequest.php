@@ -28,6 +28,8 @@ class CreatePersonalRequest extends FormRequest
             'peen_nombres' =>'required',
             'peen_apellidos'=>'required',
             'peen_telefono'=>'required',
+            'estado_id'=>'required',
+
         ];
     }
 

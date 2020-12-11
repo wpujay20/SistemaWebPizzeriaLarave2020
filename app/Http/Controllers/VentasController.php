@@ -22,7 +22,7 @@ class VentasController extends Controller
 
         $listaVentas = DB::table('venta_deliveries')
         ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
-        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('usuarios', 'usuarios.id', '=', 'venta_deliveries.usuario_id')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
         ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
         ->select('venta_deliveries.*', 'lugar_entregas.*',  'usuarios.*',  'personas.*', 'personal_entregas.*')
@@ -66,7 +66,7 @@ class VentasController extends Controller
         ->join('pizzas', 'pizzas.pizza_id', '=', 'detalle_ventas.pizza_id')
         ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
         ->join('tipo_pizzas', 'tipo_pizzas.tipopizza_id', '=', 'pizzas.tipopizza_id')
-        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('usuarios', 'usuarios.id', '=', 'venta_deliveries.usuario_id')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
         ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
         ->select('detalle_ventas.*', 'venta_deliveries.*', 'pizzas.*', 'lugar_entregas.*', 'tipo_pizzas.*', 'usuarios.*',  'personas.*', 'personal_entregas.*')
@@ -86,7 +86,7 @@ class VentasController extends Controller
     {
         $listaVentasEdit = DB::table('venta_deliveries')
         ->join('lugar_entregas', 'lugar_entregas.lugarentrega_id', '=', 'venta_deliveries.lugarentrega_id')
-        ->join('usuarios', 'usuarios.usuario_id', '=', 'venta_deliveries.usuario_id')
+        ->join('usuarios', 'usuarios.id', '=', 'venta_deliveries.usuario_id')
         ->join('personas', 'personas.persona_id', '=', 'usuarios.persona_id')
         ->join('personal_entregas', 'personal_entregas.personalentrega_id', '=', 'venta_deliveries.personalentrega_id')
         ->select('venta_deliveries.*', 'lugar_entregas.*',  'usuarios.*',  'personas.*', 'personal_entregas.*')

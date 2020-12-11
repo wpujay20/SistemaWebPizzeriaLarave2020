@@ -31,9 +31,12 @@ class PersonalEntregaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        personal_entrega::create($request->all());
+        return redirect("personal");
+           
     }
 
     /**
@@ -46,7 +49,8 @@ class PersonalEntregaController extends Controller
     {
         personal_entrega::create($request->all());
 
-            return redirect("personal");
+        return redirect("personal");
+        
     }
 
     /**
@@ -96,5 +100,8 @@ class PersonalEntregaController extends Controller
     public function destroy($id)
     {
         //
+        $pizza = personal_entrega::findOrFail($id);
+        $pizza->delete();
+        return redirect("personal");
     }
 }

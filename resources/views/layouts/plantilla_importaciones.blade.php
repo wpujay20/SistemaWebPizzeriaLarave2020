@@ -1,16 +1,3 @@
-
-<?php
-
-
-if (Auth::check())  {
-    // The user is logged in...
-    echo "USUARIO LOGEADO";
-   // var_dump(Auth::user()->id);
-}else{
-    echo "NO LOGEADO";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 	<head>
@@ -43,7 +30,7 @@ if (Auth::check())  {
 		<!-- zona de cabecera - este menu esta brindando a los demas blades  -->
 
 			<header id="header">
-				<a href="{{url("index_buena_pizza")}}">
+				<a href="{{url("/")}}">
 					<img src="{{asset('images/Captura.PNG')}}" width="50px" height="50px">
 				</a>
                     <h2 class="index_titulo">La buena pizza</h2>
@@ -58,18 +45,27 @@ if (Auth::check())  {
 
 
                     @if (Auth::check())
+                        <li>
+                        <a  href="#" style="margin-left:400px ">Bienvenido {{Auth::user()->name}}</a>
+                        </li>
+                        {{--EL FORMULARIO DE CERRAR SESIÓN ESTÁ EN LA OTRA PARTE DE CERRAR SESIÓN --}}
+                        <li>
+                                    {{link_to('', $title = "Cerrar Sesión", $attributes = array('onclick'=>'event.preventDefault();document.getElementById("logout-form").submit();'))}}
+                        </li>
 
                     @else
+
                         <li>
                             {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'btn btn-btn-success ', 'style'=>'margin-left:500px'))}}
                         </li>
 
 
+
                         <li>
-                           {{link_to('register', $title = "Registrarce")}}
+                           {{link_to('register', $title = "Registrarse")}}
                         </li>
                     @endif
-                         {{-- <li>{{link_to('promociones', $title = "Registrarce")}}</li> --}}
+                         {{-- <li>{{link_to('promociones', $title = "Registrarse")}}</li> --}}
                     </ul>
 
 
@@ -82,14 +78,10 @@ if (Auth::check())  {
                     </ul>
 
                 </nav>
-
-
 			</header>
-
 
 		<!-- zona de menu lateral - este menu esta brindando a los demas blades  -->
 		<section id="menu">
-
             <!-- Links -->
                     @if (Auth::check())
 			<section>
@@ -112,42 +104,33 @@ if (Auth::check())  {
             @endif
 			<!-- Actions -->
 			<section>
-
-
-
-                    @if (Auth::check())
-                     <ul class="actions stacked">
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-                                                        @csrf
-                            <li>
-                                 {{-- {{link_to('login', $title = "Cerrar Sesión", $attributes = array('class' => 'button large fit'))}} --}}
-                                  <a class="button large fit"
-                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
-                            </li>
-                            </form>
-                        </ul>
-                    @else
-                     <ul class="actions stacked">
+                @if (Auth::check())
+                 <ul class="actions stacked">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                        @csrf
                         <li>
-                            {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'button large fit'))}}
+                              <a class="button large fit"
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('Cerrar Sesión') }}
+                                </a>
+                        </li>
+                        </form>
+                    </ul>
+                @else
+                 <ul class="actions stacked">
+                    <li>
+                        {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'button large fit'))}}
+                    </li>
+                </ul>
+
+                    <ul class="actions stacked">
+                        <li>
+                            {{link_to('register', $title = "Registrarse", $attributes = array('class' => 'button large fit'))}}
                         </li>
                     </ul>
-
-                        <ul class="actions stacked">
-                            <li>
-                                {{link_to('register', $title = "Registrarce", $attributes = array('class' => 'button large fit'))}}
-                            </li>
-                        </ul>
-                    @endif
-
-
-
-
+                @endif
 			</section>
 		</section>
-
 
 			@yield('cuerpo_seccion')
 

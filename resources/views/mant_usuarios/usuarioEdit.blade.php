@@ -25,7 +25,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
 @section('cuerpo_seccion')
 
 
-{!! Form::model($usuario_edit[0], ['method'=>'post', 
+{!! Form::model($usuario_edit[0], ['method'=>'post',
                             'action'=>['UsuariosController@update',
                             $usuario_edit[0]->persona_id]])!!}
     {{csrf_field()}}
@@ -51,10 +51,10 @@ Mantenimientos Pizzeria "La Buena Pizza"
         <tr>
             <tr>
             <td>{{Form::label('Correo')}}</td>
-            <td>{{Form::text('usu_correo', $usuario_edit[0]->usu_correo,['class'=>'form-control'])}} </td>
+            <td>{{Form::text('email', $usuario_edit[0]->email,['class'=>'form-control'])}} </td>
         </tr>
             <td>{{Form::label('Contraseña')}}</td>
-            <td>{{Form::text('usu_pass', $usuario_edit[0]->usu_pass,['class'=>'form-control'])}} </td>
+            <td>{{Form::text('password', $usuario_edit[0]->password,['class'=>'form-control'])}} </td>
         </tr>
         <tr>
             <td>{{Form::label('Tipo de Usuario')}}</td>
@@ -82,8 +82,8 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td colspan="2" align="center" class="botones">
                 {{link_to('usuarios', $title = "Regresar", $attributes = array('class' => 'btn btn-secondary'))}}
                 {{Form::submit('Editar',['class'=>'btn btn-warning'])}}
-                
-            </td>   
+
+            </td>
         </tr>
 </table>
 {!! Form::close() !!}
@@ -92,5 +92,5 @@ Mantenimientos Pizzeria "La Buena Pizza"
 
 
 @section('zonaBotones')
-    
+
 @endsection

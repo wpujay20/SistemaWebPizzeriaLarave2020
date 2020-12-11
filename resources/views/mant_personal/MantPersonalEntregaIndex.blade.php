@@ -37,7 +37,7 @@ Personal de Entrega
             <td style="text-align:center"> <a href="{{route('personal.edit',$i->personalentrega_id)}}" name="editar" class="btn btn-warning"> Editar </a></td>
 
             <td style="text-align:center">
-                {!! Form::open(['action' => ['UsuariosController@destroy', $i->personalentrega_id]]) !!}
+                {!! Form::open(['action' => ['PersonalEntregaController@destroy', $i->personalentrega_id]]) !!}
 
                     {{csrf_field()}}
                     {{method_field('DELETE') }}
@@ -59,8 +59,9 @@ Personal de Entrega
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
 
+        
 
-            {!! Form::open([ 'route' => ['personal.store'], 'method'=>'POST' ]) !!}
+            {!! Form::open([ 'route' => ['personal.create'], 'method'=>'POST' ]) !!}
 
             <div class="modal-content">
                 <div class="modal-header">

@@ -10,14 +10,15 @@ Mantenimientos Pizzeria "La Buena Pizza"
 @endsection
 @section('cuerpo_seccion')
 
-    <table id="tablaCRUD" class="table table-striped table-bordered" style="width:100%";>
+    <table id="tablaCRUD" class="table table-striped table-bordered"  >
 
     <thead>
         <tr>
             <th>Id</th>
             <th>TipoUsuario</th>
             <th>Correo</th>
-            <th>Contraseña</th>
+            <th WIDTH="50" 
+	            >Contraseña</th>
             <th>Estado</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -34,7 +35,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{$i->id}}</td>
             <td>{{$i->tipo_nombre}}</td>
             <td>{{$i->email}}</td>
-            <td>{{$i->password}}</td>
+            <td >{{$i->password}}</td>
             <td>{{$i->usu_estado}}</td>
             <td>{{$i->per_nombres}}</td>
             <td>{{$i->per_apellidos}}</td>

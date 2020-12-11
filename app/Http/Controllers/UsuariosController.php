@@ -10,7 +10,7 @@ use  Illuminate\Support\Facades\Auth;
 use App\usuario;
 use App\tipo_usuario;
 use App\persona;
-
+use Illuminate\Support\Facades\Hash;
 class UsuariosController extends Controller
 {
     /**
@@ -86,38 +86,6 @@ class UsuariosController extends Controller
     }
 
 
-     public function validarUsuario(Request $request)
-    {
-        extract($_REQUEST);
-       // $user = usuario::whereRaw("usu_correo ='".$usu_correo."' and usu_pass ='".$usu_pass."'")->get('tipousu_id');
-
-       $usuario= new usuario();
-
-       $user = usuario::whereRaw("usu_correo ='".$usu_correo."' and usu_pass ='".$usu_pass."'")->get()->first();
-
-       if($user['tipousu_id']==3){
-            //Auth::login();
-           $ruta="mantenimientos.mant_index";
-       }else{
-           Auth::login($user['usu_correo']);
-           Auth::guard($user['usu_correo']);
-
-            $ruta="vistas.index";
-
-        return redirect('/');
-       }
-
-       // var_dump($user);
-
-        return  view($ruta);
-    }
-
-    public function verificarUser(Request $request, $user,$pass){
-
-
-
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -162,8 +130,8 @@ class UsuariosController extends Controller
                     'per_apellidos' =>$request->input("per_apellidos"),
                     'per_dni' =>$request->input("per_dni"),
                     'per_telefono' =>$request->input("per_telefono"),
-                    'usu_correo' =>$request->input("usu_correo"),
-                    'usu_pass' =>$request->input("usu_pass"),
+                    'email' =>$request->input("email"),
+                    'password' =>Hash::make($request->input("password"),),
                     'tipousu_id' =>$request->input("tipo_usuario"),
                     'usu_estado' =>$request->input("usu_estado")
         ]);
