@@ -2,14 +2,6 @@
 <?php
 
 
-if (Auth::check())  {
-    // The user is logged in...
-    echo "USUARIO LOGEADO";
-   // var_dump(Auth::user()->id);
-}else{
-    echo "NO LOGEADO";
-}
-
 if (Auth::check()){
 		$userid=Auth::user()->id;
 		$cart=Cart::getContent();
@@ -94,14 +86,14 @@ if (Auth::check()){
                         <li>{{link_to('promociones', $title = "Promociones")}}</li>
 						<li>
 						<img src="{{asset('images/rebanada-de-pizza.png')}}" width="16px" height="16px">
-							<a href=#>|
+							<a href=# class="is-preload">
 							Carrito({{$contador}})
 							</a>
 						</li>
 
                     @if (Auth::check())
                         <li>
-                        <a  href="#" style="margin-left:400px ">Bienvenido {{Auth::user()->name}}</a>
+                        <a  href="#" style="margin-left:250px ">Bienvenido {{Auth::user()->name}}</a>
                         </li>
                         {{--EL FORMULARIO DE CERRAR SESIÓN ESTÁ EN LA OTRA PARTE DE CERRAR SESIÓN --}}
                         <li>
@@ -111,7 +103,7 @@ if (Auth::check()){
                     @else
 
                         <li>
-                            {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'btn btn-btn-success ', 'style'=>'margin-left:500px'))}}
+                            {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'btn btn-btn-success ', 'style'=>'margin-left:270px'))}}
                         </li>
 
 
@@ -157,6 +149,7 @@ if (Auth::check()){
 				</ul>
 						@if(count(Cart::session($userid)->getContent())>0)
 						<p><span>
+                            <h3>Carrito de Compras</h3>
 							<table>
 								<thead>
 									<th></th>

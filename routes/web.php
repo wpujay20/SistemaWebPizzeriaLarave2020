@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::get('/index_buena_pizza', function () {
      $usu = new usuario();
     return $usu->validarRuta();
-});
+})->name('index_buena_pizza');
 
 
 Route::get('/promociones', function () {
