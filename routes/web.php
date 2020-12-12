@@ -142,4 +142,7 @@ Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function() {
+    $usu = new usuario();
+    return $usu->validarRuta();
+}, 'HomeController@index')->name('home');

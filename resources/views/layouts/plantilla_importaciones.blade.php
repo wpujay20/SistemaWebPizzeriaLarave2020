@@ -185,6 +185,7 @@ if (Auth::check()){
 							@if (Cart::isEmpty()==false)
 							{{-- {{Cart::session(Auth::user()->id)->getContent()}}	 --}}
 								<p><span>
+                                    <h3>Carrito de Compras</h3>
 								<table>
 									<thead>
 										<th></th>

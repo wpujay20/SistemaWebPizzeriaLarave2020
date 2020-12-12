@@ -1,4 +1,4 @@
- 
+
 
 <!DOCTYPE html>
 <html lang="es" class="no-js">
@@ -58,9 +58,9 @@
                             <li><a href="{{route('ventas_delivery.index')}}">Ventas</a></li>
 
                             @if (Auth::check())
-                                <li>
+                                {{-- <li>
                                     {{link_to('#', $title = "Bienvenido ".Auth::user()->name."", $attributes = array('class' => '', 'style'=>''))}}
-                                </li>
+                                </li> --}}
                                 <li>
                                             {{link_to('', $title = "Cerrar Sesión", $attributes = array('onclick'=>'event.preventDefault();document.getElementById("logout-form").submit();'))}}
                                 </li>
@@ -81,7 +81,7 @@
         </div>
     <div class="cuerpo">
 
-        <section> 
+        <section>
             @yield('cuerpo_seccion')
 		</section>
 
