@@ -2366,13 +2366,13 @@
                 ]
             }
         },
-        "installation-source": "dist",
+        "installation-source" : "dist",
         "autoload": {
             "psr-4": {
                 "NunoMaduro\\Collision\\": "src/"
             }
         },
-        "notification-url": "https://packagist.org/downloads/",
+        "notification-url" : "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],

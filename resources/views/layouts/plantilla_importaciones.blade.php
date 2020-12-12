@@ -9,6 +9,43 @@ if (Auth::check())  {
 }else{
     echo "NO LOGEADO";
 }
+
+if (Auth::check()){
+		$userid=Auth::user()->id;
+		$cart=Cart::getContent();
+		Cart::clear();	
+		foreach ($cart as $item) {	
+		
+			Cart::session($userid)->add(
+				$item->id,
+				$item->name,
+				$item->price,
+				$item->quantity,
+				array("pizza_img"=>$item["attributes"]["pizza_img"])
+			);
+			
+			
+		}
+		
+		$contador=count(Cart::session($userid)->getContent());
+				
+	}else{
+
+			if (Cart::isEmpty()==true){
+				$contador=0;
+			}else{
+				$contador=count(Cart::getContent());
+			}
+			
+		}
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +76,7 @@ if (Auth::check())  {
 
 	</head>
 	<body class="is-preload">
-
+		
 		<!-- zona de cabecera - este menu esta brindando a los demas blades  -->
 
 			<header id="header">
@@ -55,7 +92,12 @@ if (Auth::check())  {
                         </li>
 
                         <li>{{link_to('promociones', $title = "Promociones")}}</li>
-
+						<li>
+						<img src="{{asset('images/rebanada-de-pizza.png')}}" width="16px" height="16px">
+							<a href=#>|
+							Carrito({{$contador}})
+							</a>
+						</li>
 
                     @if (Auth::check())
 
@@ -66,7 +108,7 @@ if (Auth::check())  {
 
 
                         <li>
-                           {{link_to('register', $title = "Registrarce")}}
+                           {{link_to('register', $title = "Registrarse")}}
                         </li>
                     @endif
                          {{-- <li>{{link_to('promociones', $title = "Registrarce")}}</li> --}}
@@ -91,8 +133,9 @@ if (Auth::check())  {
 		<section id="menu">
 
             <!-- Links -->
-                    @if (Auth::check())
+                   
 			<section>
+				 @if (Auth::check())
 				<ul class="links">
 					<li>
 						<a href="{{route("PerfilDeUsuario.show","". Auth::user()->persona_id."")}}" name="Perfil">
@@ -104,11 +147,12 @@ if (Auth::check())  {
 						<a href="" name="Perfil">
 							<h3>Tus Pedidos</h3>
 						</a>
-						
-						
-							@if (count(Cart::getContent())>0)
-							<p><span>
-							<table width="50%">
+							
+					</li>
+				</ul>
+						@if(count(Cart::session($userid)->getContent())>0)
+						<p><span>
+							<table>
 								<thead>
 									<th></th>
 									<th>Pizza</th>
@@ -117,7 +161,7 @@ if (Auth::check())  {
 									<th></th>
 								</thead>
 								<tbody>
-									@foreach (Cart::getContent() as $item)
+									@foreach (Cart::session($userid)->getContent() as $item)
 									<tr>
 										<td><img width="50px" src="{{asset('images/' . $item->attributes['pizza_img'] .'')}}"></td>
 										<td>{{$item->name}}</td>
@@ -135,14 +179,52 @@ if (Auth::check())  {
 								<tbody>
 							</table>
 							</span></p>
+						
 							@else
 							<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
-						@endif
-					</li>
-				</ul>
+							@endif
+							@else
+							@if (Cart::isEmpty()==false)
+							{{-- {{Cart::session(Auth::user()->id)->getContent()}}	 --}}
+								<p><span>
+								<table>
+									<thead>
+										<th></th>
+										<th>Pizza</th>
+										<th>Cantidad</th>
+										<th>Precio</th>
+										<th></th>
+									</thead>
+									<tbody>
+										@foreach (Cart::getContent() as $item)
+										<tr>
+											<td><img width="50px" src="{{asset('images/' . $item->attributes['pizza_img'] .'')}}"></td>
+											<td>{{$item->name}}</td>
+											<td>{{$item->quantity}}</td>
+											<td>{{$item->price*$item->quantity}}</td>
+											<td>
+												<form action="{{route('cart.removeitem')}}" method="POST">
+													@csrf
+												<input type="hidden" name="pizza_id" value="{{$item->id}}">
+												<button type="submit" class="btn button">x</button>
+												</form>
+											</td>
+										</tr>
+										@endforeach
+									<tbody>
+								</table>
+								</span></p>
+								@else
+								
+							@endif
+					@endif
+				
+
+			
+						
             </section>
-            @else
-            @endif
+            
+			
 			<!-- Actions -->
 			<section>
 
@@ -170,7 +252,7 @@ if (Auth::check())  {
 
                         <ul class="actions stacked">
                             <li>
-                                {{link_to('register', $title = "Registrarce", $attributes = array('class' => 'button large fit'))}}
+                                {{link_to('register', $title = "Registrarse", $attributes = array('class' => 'button large fit'))}}
                             </li>
                         </ul>
                     @endif
