@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $usu = new usuario();
-    return $usu->validarRuta();   
+    return $usu->validarRuta();
 });
 
 Route::get('/index_buena_pizza', function () {
      $usu = new usuario();
-    return $usu->validarRuta();  
+    return $usu->validarRuta();
 });
 
 
@@ -31,6 +31,11 @@ Route::get('/promociones', function () {
 });
 
 Auth::routes();
+Route::post('/cart-add', 'CarroComprasController@add')->name('cart.add');
+Route::get('/cart-clear', 'CarroComprasController@clear')->name('cart.clear');
+Route::post('/cart-removeitem',  'CarroComprasController@removeitem')->name('cart.removeitem');
+
+
 
 Route::group(['middleware' => ['auth']], function() {
     /*
@@ -40,8 +45,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('personal',function(){
     $C= new PersonalEntregaController();
-     
-    $usu = new usuario();   
+
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $C->index();
     }else{
@@ -56,8 +61,8 @@ Route::delete('upersonalers/{personalEntrega}',     ['middleware' => [], 'as' =>
 
 Route::get('mantenimientos',function(){
     $M= new MantenimientoController();
-    
-    $usu = new usuario();   
+
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $M->index();
     }else{
@@ -67,8 +72,8 @@ Route::get('mantenimientos',function(){
 
 Route::get('pizzas',function(){
     $p= new PizzasController();
-    
-    $usu = new usuario();   
+
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $p->index();
     }else{
@@ -84,9 +89,9 @@ Route::delete('pizzas/{pizzas}',            ['middleware' => [], 'as' => 'pizzas
 //Route::resource('/mantenimientos', MantenimientoController::class);
 //Route::resource('/pizzas', PizzasController::class);
 Route::get('tipo_pizzas',function(){
-    
+
     $tipo= new tipo_pizzasController();
-    $usu = new usuario();   
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $tipo->index();
     }else{
@@ -100,9 +105,9 @@ Route::put('tipo_pizzas/actualizar/{pizzas}',    ['middleware' => [], 'as' => 't
 Route::delete('tipo_pizzas/{pizzas}',            ['middleware' => [], 'as' => 'tipo_pizzas.destroy',     'uses' => 'tipo_pizzasController@destroy' ] );
 
 Route::get('usuarios',function(){
-    
+
     $tipo= new UsuariosController();
-    $usu = new usuario();   
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $tipo->index();
     }else{
@@ -116,9 +121,9 @@ Route::put('usuarios/actualizar/{pizzas}',    ['middleware' => [], 'as' => 'usua
 Route::delete('usuarios/{pizzas}',            ['middleware' => [], 'as' => 'usuarios.destroy',     'uses' => 'UsuariosController@destroy' ] );
 
 Route::get('ventas_delivery',function(){
-    
+
     $tipo= new VentasController();
-    $usu = new usuario();   
+    $usu = new usuario();
     if(Auth::user()->tipousu_id==3){
         return $tipo->index();
     }else{

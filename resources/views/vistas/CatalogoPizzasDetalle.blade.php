@@ -34,25 +34,25 @@
                         <img src="{{asset('images/'.$detallepizza->pizza_img .'') }} " class="card-img-top" alt="...">
                             
 						</div>
+
 						<div class="card" style="width: 52%; float: middle" style="text-align: center; margin:2px auto">
 							<div class="card-body">
-                                <h3 class="card-title">{{$detallepizza->pizza_nombre}}</h3>
+								<h2 class="card-title">{{$detallepizza->pizza_nombre}}</h2>
+								<h5>Descripcion :</h5>
 								<p class="card-text">{{$detallepizza->pizza_descripcion}}.</p>
 								<p class="card-text">Precio : S/.{{$detallepizza->pizza_precio}}</p>
-								
-								<p class="card-text">Cantidad: 
-									<select style=" width: 5rem">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-									</select>
-								</p>
-								<button>Añadir al Carrito</button>
+
+								<form action="{{route('cart.add')}}" method="POST">
+									@csrf
+								<p class="card-text">Cantidad:
+									<input type="hidden" name="pizza_id" id="pizza_id" value="{{$detallepizza->pizza_id}}">
+									<input type="number" style="text-align: center" name="cant" id="cant" min="1" value="1" max="25" required>
+								</p>	
+
+							{{-- <a class="button" href="{{route('cart.add')}}">Añadir al Carrito</a> --}}
+
+								<input type="submit" value="Añadir al Carrito">
+								</form>
 							</div>	
 						</div>
 					</div>

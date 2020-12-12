@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Cart;
+use App\pizza;
+use Illuminate\Support\Facades\Auth;
 class CarroComprasController extends Controller
 {
     /**
@@ -11,6 +13,48 @@ class CarroComprasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function add(Request $request){
+        
+            $producto = pizza::find($request->pizza_id);
+            $cant =$request->input('cant');
+            Cart::add(
+            $producto->pizza_id, 
+            $producto->pizza_nombre,
+            $producto->pizza_precio,
+            $cant,
+            array("pizza_img"=>$producto->pizza_img)
+        );
+    
+        
+        
+        return back()->with('success',"$producto->pizza_nombre ¡se ha agregado con éxito al carrito!");
+            
+    }
+
+    public function clear(){
+        Cart::clear();
+        Cart::session(Auth::user()->id)->clear();
+        return back()->with('success',"The shopping cart has successfully beed added to the shopping cart!");
+    }
+
+    public function removeitem(Request $request) {
+        //$producto = Producto::where('id', $request->id)->firstOrFail();
+        if(Auth::check()){
+            Cart::session(Auth::user()->id)->remove([
+                'id'=>$request->pizza_id,
+            ]);
+        }else{
+            Cart::remove([
+        'id' => $request->pizza_id,
+        ]);
+        }
+        
+        return back()->with('success',"Producto eliminado con éxito de su carrito.");
+    }
+
+
     public function index()
     {
         //
