@@ -127,7 +127,7 @@
                         <label for="lname">Dirección:</label>
                         <input type="text" id="lname" name="lname" placeholder="Distrito. Calle">
                         <br>
-                        <label for="lname">Coontraseña:</label>
+                        <label for="lname">Contraseña:</label>
                         <input type="password" id="lname" name="lname" placeholder="Contraseña">
                         <br>
                         <button type="submit">Crear cuenta</button><br><br>

@@ -1,3 +1,45 @@
+
+<?php
+
+
+if (Auth::check()){
+		$userid=Auth::user()->id;
+		$cart=Cart::getContent();
+		Cart::clear();
+		foreach ($cart as $item) {
+
+			Cart::session($userid)->add(
+				$item->id,
+				$item->name,
+				$item->price,
+				$item->quantity,
+				array("pizza_img"=>$item["attributes"]["pizza_img"])
+			);
+
+
+		}
+
+		$contador=count(Cart::session($userid)->getContent());
+
+	}else{
+
+			if (Cart::isEmpty()==true){
+				$contador=0;
+			}else{
+				$contador=count(Cart::getContent());
+			}
+
+		}
+
+
+
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 	<head>
@@ -42,11 +84,16 @@
                         </li>
 
                         <li>{{link_to('promociones', $title = "Promociones")}}</li>
-
+						<li>
+						<img src="{{asset('images/rebanada-de-pizza.png')}}" width="16px" height="16px">
+							<a href=# class="is-preload">
+							Carrito({{$contador}})
+							</a>
+						</li>
 
                     @if (Auth::check())
                         <li>
-                        <a  href="#" style="margin-left:400px ">Bienvenido {{Auth::user()->name}}</a>
+                        <a  href="#" style="margin-left:250px ">Bienvenido {{Auth::user()->name}}</a>
                         </li>
                         {{--EL FORMULARIO DE CERRAR SESIÓN ESTÁ EN LA OTRA PARTE DE CERRAR SESIÓN --}}
                         <li>
@@ -56,7 +103,7 @@
                     @else
 
                         <li>
-                            {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'btn btn-btn-success ', 'style'=>'margin-left:500px'))}}
+                            {{link_to('login', $title = "Iniciar Sesión", $attributes = array('class' => 'btn btn-btn-success ', 'style'=>'margin-left:270px'))}}
                         </li>
 
 
@@ -83,8 +130,9 @@
 		<!-- zona de menu lateral - este menu esta brindando a los demas blades  -->
 		<section id="menu">
             <!-- Links -->
-                    @if (Auth::check())
+
 			<section>
+				 @if (Auth::check())
 				<ul class="links">
 					<li>
 						<a href="{{route("PerfilDeUsuario.show","". Auth::user()->persona_id."")}}" name="Perfil">
@@ -96,12 +144,85 @@
 						<a href="" name="Perfil">
 							<h3>Tus Pedidos</h3>
 						</a>
-						<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
+
 					</li>
 				</ul>
+						@if(count(Cart::session($userid)->getContent())>0)
+						<p><span>
+                            <h3>Carrito de Compras</h3>
+							<table>
+								<thead>
+									<th></th>
+									<th>Pizza</th>
+									<th>Cantidad</th>
+									<th>Precio</th>
+									<th></th>
+								</thead>
+								<tbody>
+									@foreach (Cart::session($userid)->getContent() as $item)
+									<tr>
+										<td><img width="50px" src="{{asset('images/' . $item->attributes['pizza_img'] .'')}}"></td>
+										<td>{{$item->name}}</td>
+										<td>{{$item->quantity}}</td>
+										<td>{{$item->price*$item->quantity}}</td>
+										<td>
+											<form action="{{route('cart.removeitem')}}" method="POST">
+												@csrf
+											<input type="hidden" name="pizza_id" value="{{$item->id}}">
+											<button type="submit" class="btn button">x</button>
+											</form>
+										</td>
+									</tr>
+									@endforeach
+								<tbody>
+							</table>
+							</span></p>
+
+							@else
+							<p><span>Puedes hacer el seguimiento de tu pedido, asi como ver tu historial de compras y facturas</span></p>
+							@endif
+							@else
+							@if (Cart::isEmpty()==false)
+							{{-- {{Cart::session(Auth::user()->id)->getContent()}}	 --}}
+								<p><span>
+								<table>
+									<thead>
+										<th></th>
+										<th>Pizza</th>
+										<th>Cantidad</th>
+										<th>Precio</th>
+										<th></th>
+									</thead>
+									<tbody>
+										@foreach (Cart::getContent() as $item)
+										<tr>
+											<td><img width="50px" src="{{asset('images/' . $item->attributes['pizza_img'] .'')}}"></td>
+											<td>{{$item->name}}</td>
+											<td>{{$item->quantity}}</td>
+											<td>{{$item->price*$item->quantity}}</td>
+											<td>
+												<form action="{{route('cart.removeitem')}}" method="POST">
+													@csrf
+												<input type="hidden" name="pizza_id" value="{{$item->id}}">
+												<button type="submit" class="btn button">x</button>
+												</form>
+											</td>
+										</tr>
+										@endforeach
+									<tbody>
+								</table>
+								</span></p>
+								@else
+
+							@endif
+					@endif
+
+
+
+
             </section>
-            @else
-            @endif
+
+
 			<!-- Actions -->
 			<section>
                 @if (Auth::check())
