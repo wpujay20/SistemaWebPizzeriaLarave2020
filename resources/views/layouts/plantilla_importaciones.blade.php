@@ -86,7 +86,7 @@ if (Auth::check()){
                         <li>{{link_to('promociones', $title = "Promociones")}}</li>
 						<li>
 						<img src="{{asset('images/rebanada-de-pizza.png')}}" width="16px" height="16px">
-							<a href=# class="is-preload">
+							<a href="{{route('Mostrar.Carrito')}}" class="is-preload">
 							Carrito({{$contador}})
 							</a>
 						</li>
@@ -190,7 +190,7 @@ if (Auth::check()){
 										<th></th>
 										<th>Pizza</th>
 										<th>Cantidad</th>
-										<th>Precio</th>
+										<th>SubTotal</th>
 										<th></th>
 									</thead>
 									<tbody>
@@ -208,6 +208,7 @@ if (Auth::check()){
 												</form>
 											</td>
 										</tr>
+										
 										@endforeach
 									<tbody>
 								</table>

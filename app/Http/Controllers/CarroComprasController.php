@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Cart;
 use App\pizza;
+use App\tipo_pizza;
 use Illuminate\Support\Facades\Auth;
 class CarroComprasController extends Controller
 {
@@ -18,10 +19,11 @@ class CarroComprasController extends Controller
     public function add(Request $request){
         
             $producto = pizza::find($request->pizza_id);
+            $tipo = tipo_pizza::find($producto->tipopizza_id);
             $cant =$request->input('cant');
             Cart::add(
             $producto->pizza_id, 
-            $producto->pizza_nombre,
+            $producto->pizza_nombre." ".$tipo->tpi_tamano,
             $producto->pizza_precio,
             $cant,
             array("pizza_img"=>$producto->pizza_img)
@@ -53,6 +55,10 @@ class CarroComprasController extends Controller
         
         return back()->with('success',"Producto eliminado con éxito de su carrito.");
     }
+
+        public function MostrarCarrito(){
+            return view('vistas.CarritoPizza');
+        }
 
 
     public function index()

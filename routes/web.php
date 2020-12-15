@@ -34,7 +34,7 @@ Auth::routes();
 Route::post('/cart-add', 'CarroComprasController@add')->name('cart.add');
 Route::get('/cart-clear', 'CarroComprasController@clear')->name('cart.clear');
 Route::post('/cart-removeitem',  'CarroComprasController@removeitem')->name('cart.removeitem');
-
+Route::get('/Carrito', 'CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
 
 
 Route::group(['middleware' => ['auth']], function() {
