@@ -130,16 +130,39 @@ Route::get('ventas_delivery',function(){
         return $usu->validarRuta();
     }
 })->name('ventas_delivery.index');
+
+ 
 //Route::resource('/ventas_delivery', VentasController::class);
-Route::post('ventas_delivery/create',              ['middleware' => [], 'as' => 'ventas_delivery.store',      'uses' => 'VentasController@store' ]);
 Route::get('ventas_delivery/edit/{dato}',          ['middleware' => [], 'as' => 'ventas_delivery.edit',       'uses' => 'VentasController@edit' ]);
 Route::get('ventas_delivery/{dato}',               ['middleware' => [], 'as' => 'ventas_delivery.show',       'uses' => 'VentasController@show' ]);
 Route::put('ventas_delivery/actualizar/{dato}',    ['middleware' => [], 'as' => 'ventas_delivery.update',     'uses' => 'VentasController@update' ]);
 Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 'ventas_delivery.destroy',     'uses' => 'VentasController@destroy' ] );
 
+//pagar por lado del cliente
+
+Route::post('ventas_delivery/create',              ['middleware' => [], 'as' => 'ventas_delivery.store',      'uses' => 'VentasController@store' ]);
+
+
+Route::get('pagar',function(){
+    return view('vistas.pagar_prueba');
+})->name('pagar');
+
 });
+
+Route::post('pedidos/{id}',function(){
+
+    return view('vistas.pagar_prueba');
+
+})->name('pagar');
+
+
 
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+
