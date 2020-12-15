@@ -18,7 +18,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <th>TipoUsuario</th>
             <th>Correo</th>
             <th WIDTH="50" 
-	            >Contraseña</th>
+	            {{-- >Contraseña</th> --}}
             <th>Estado</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -35,7 +35,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{$i->id}}</td>
             <td>{{$i->tipo_nombre}}</td>
             <td>{{$i->email}}</td>
-            <td >{{$i->password}}</td>
+            {{-- <td >{{$i->password}}</td> --}}
             <td>{{$i->usu_estado}}</td>
             <td>{{$i->per_nombres}}</td>
             <td>{{$i->per_apellidos}}</td>

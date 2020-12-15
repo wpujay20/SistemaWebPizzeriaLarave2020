@@ -54,7 +54,8 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <td>{{Form::text('email', $usuario_edit[0]->email,['class'=>'form-control'])}} </td>
         </tr>
             <td>{{Form::label('Contraseña')}}</td>
-            <td>{{Form::text('password', $usuario_edit[0]->password,['class'=>'form-control'])}} </td>
+            <td><input id="password" type="password" value="{{$usuario_edit[0]->password}}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"></td>
+             {{-- <td>{{Form::password('password', $usuario_edit[0]->password,['class'=>'form-control' ])}} </td>   --}}
         </tr>
         <tr>
             <td>{{Form::label('Tipo de Usuario')}}</td>
