@@ -70,13 +70,38 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th class="card-body align-right">Total a Pagar:</th>
-                                        <th><span>S/. {{Cart::getTotal()}}</span></th>
+                                        <th style="font-size: 20px" class="card-body align-right">Total a Pagar:</th>
+                                        <th style="font-size: 20px">S/. {{Cart::getTotal()}}</th>
                                         <th></th>
-                                       
                                     </tr>
 								<tbody>
-                            </table>
+							</table>
+							
+                            <form>
+                                <table>
+                                    <thead>
+										<td>Direccion:</td>
+										<td><input type="text" name="dir" id="dir" required></td>
+									</thead>
+                                    <thead>
+										<td>Referencia:</td>
+										<td><input type="text" name="ref" id="ref" required></td>
+									</thead>
+									<thead>
+										<td>Distrito:</td>
+										<td>
+											<select name="distrito">
+												<option>--Distritos Disponibles--</option>
+												<option>Villa el Salvador</option>
+												<option>Villa Maria del Triunfo</option>
+												<option>Pachacamac</option>
+												<option>Lurin</option>
+											</select>
+
+										</td>
+									</thead>
+                                </table>
+                            </form>
                             
                                         @else
                                         <span><p>Aun no tienes pizzas en tu carrito :c</p></span>
