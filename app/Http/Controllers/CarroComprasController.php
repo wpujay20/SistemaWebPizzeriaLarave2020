@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Cart;
+use Darryldecode\Cart;
+//use Cart;
 use App\pizza;
 use App\tipo_pizza;
 use Illuminate\Support\Facades\Auth;
@@ -17,22 +20,22 @@ class CarroComprasController extends Controller
 
 
     public function add(Request $request){
-        
+
             $producto = pizza::find($request->pizza_id);
             $tipo = tipo_pizza::find($producto->tipopizza_id);
             $cant =$request->input('cant');
             Cart::add(
-            $producto->pizza_id, 
+            $producto->pizza_id,
             $producto->pizza_nombre." ".$tipo->tpi_tamano,
             $producto->pizza_precio,
             $cant,
             array("pizza_img"=>$producto->pizza_img)
         );
-    
-        
-        
+
+
+
         return back()->with('success',"$producto->pizza_nombre ¡se ha agregado con éxito al carrito!");
-            
+
     }
 
     public function clear(){
@@ -52,7 +55,7 @@ class CarroComprasController extends Controller
         'id' => $request->pizza_id,
         ]);
         }
-        
+
         return back()->with('success',"Producto eliminado con éxito de su carrito.");
     }
 
@@ -84,7 +87,18 @@ class CarroComprasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
+        $dato= $request->all();
+        echo "<pre>". var_export($dato). "</pre>";
+
+        $carrito =  Cart::session(Auth::user()->id)->getContent();
+        $car= $carrito->toArray();
+         var_dump($car); //. "</pre>";
+
+
+
+        return "Hola mudio";
     }
 
     /**

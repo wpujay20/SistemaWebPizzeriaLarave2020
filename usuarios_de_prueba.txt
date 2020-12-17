@@ -1,0 +1,82 @@
+CUENTAS DE PRUEBA PARA EL MERCADOPAGO
+
+usuarios de Vendedores
+Cuenta 1:
+{"id":688034672,
+"nickname":"TETE8176733",
+"password":"qatest8447",
+"site_status":"active",
+"email":"test_user_93177459@testuser.com"
+}
+
+Cuenta 2:
+{"id":688034873,
+"nickname":"TETE5644080",
+"password":"qatest5286",
+"site_status":"active",
+"email":"test_user_49498264@testuser.com"
+}
+
+
+
+usuarios de clientes
+Cuenta 3:
+{
+"id":688033992,
+"nickname":"TESTZKEVIVVG",
+"password":"qatest9285",
+"site_status":"active",
+"email":"test_user_46957326@testuser.com"}
+
+Cuenta 4:
+{"id":688035175,"
+nickname":"TESTFKNFK4PF",
+"password":"qatest2847",
+"site_status":"active",
+"email":"test_user_68486167@testuser.com"}
+
+Cuenta 5:
+{"id":688034455,
+"nickname":"TESTWGCEYOPE",
+"password":"qatest1088",
+"site_status":"active",
+"email":"test_user_36999841@testuser.com"}
+
+Cuenta 6:
+{"id":688036696,
+"nickname":"TETE4626979",
+"password":"qatest7782",
+"site_status":"active",
+"email":"test_user_65928728@testuser.com"}
+
+
+Tarjeta	Número	Código de seguridad	Fecha de vencimiento
+Mastercard  	    5031 7557 3453 0604 	123 	11/25
+Visa            	4009 1753 3280 6176	    123	    11/25
+American Express	3711 803032 57522	    1234	11/25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -64,7 +64,7 @@ if (Auth::check()){
 
 
 		@yield('importar_css_arriba')
-		@yield('importar_js_arriba')
+		{{-- @yield('importar_js_arriba') --}}
 
 	</head>
 	<body class="is-preload">
@@ -93,7 +93,7 @@ if (Auth::check()){
 
                     @if (Auth::check())
                         <li>
-                        <a  href="#" style="margin-left:250px ">Bienvenido {{Auth::user()->name}}</a>
+                        <a  href="#" style="margin-left:auto ">Bienvenido {{Auth::user()->name}}</a>
                         </li>
                         {{--EL FORMULARIO DE CERRAR SESIÓN ESTÁ EN LA OTRA PARTE DE CERRAR SESIÓN --}}
                         <li>
@@ -208,7 +208,7 @@ if (Auth::check()){
 												</form>
 											</td>
 										</tr>
-										
+
 										@endforeach
 									<tbody>
 								</table>

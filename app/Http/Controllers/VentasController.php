@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\venta_delivery;
 use App\detalle_venta;
+use App\lugar_entrega;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EditVentasRequest;
 
@@ -51,10 +52,14 @@ class VentasController extends Controller
     public function store(Request $request)
     {
         //
+        $venta= new venta_delivery();
+        $detalle= new detalle_venta();
+        $lugar = new lugar_entrega();
+        //extract($_REQUEST);
+        echo "<pre>". var_export($_REQUEST) . "</pre>";
+        return "FALTA RELLENAR LUGAR-DETALLE-VENTA";
 
 
-
-        
     }
 
     /**

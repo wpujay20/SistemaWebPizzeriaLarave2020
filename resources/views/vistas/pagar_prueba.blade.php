@@ -13,7 +13,7 @@
 //require __DIR__ .  '/vendor/autoload.php';
 require '../vendor/autoload.php';
 
- 
+
 // Agrega credenciales
 MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a885608db6889a86-627932043');
 
@@ -21,7 +21,7 @@ MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a8
 $preference = new MercadoPago\Preference();
 
 $preference->back_urls = array(
-    "success" => "http://sistemawebpizzerialarave2020.test:9090/", // redireccionar a la lsita de pedidos     
+    "success" => "http://sistemawebpizzerialarave2020.test:9090/", // redireccionar a la lsita de pedidos
     "failure" => "http://www.tu-sitio/failure",
     "pending" => "http://www.tu-sitio/pending"
 );
@@ -41,21 +41,9 @@ $preference->save();
 <center>
 <form action="">
 
-        <br>
-        <br>
-        <br>
         <form action="/controlador@store" method="post">
-
-
-
-
-
         <script src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
             data-preference-id="<?php echo $preference->id; ?>">
-
-        </form>
-   
-    
     </script>
 
 </form>

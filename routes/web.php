@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\VentasController;
 
 
+
 use Illuminate\Support\Facades\Route;
 use App\tipo_usuario;
 use App\usuario;
@@ -131,7 +132,7 @@ Route::get('ventas_delivery',function(){
     }
 })->name('ventas_delivery.index');
 
- 
+
 //Route::resource('/ventas_delivery', VentasController::class);
 Route::get('ventas_delivery/edit/{dato}',          ['middleware' => [], 'as' => 'ventas_delivery.edit',       'uses' => 'VentasController@edit' ]);
 Route::get('ventas_delivery/{dato}',               ['middleware' => [], 'as' => 'ventas_delivery.show',       'uses' => 'VentasController@show' ]);
@@ -140,21 +141,26 @@ Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 
 
 //pagar por lado del cliente
 
-Route::post('ventas_delivery/create',              ['middleware' => [], 'as' => 'ventas_delivery.store',      'uses' => 'VentasController@store' ]);
+// Route::get('ventas_delivery/create/{dato}',              ['middleware' => 'csrf', 'as' => 'ventas_delivery.store',      'uses' => 'VentasController@store' ]);
+
+// Route::post('ventas_delivery/create/{dato}',   ['middleware' => 'csrf', 'as' => 'ventas_delivery.store',      'uses' => 'VentasController@store' ]);
 
 
-Route::get('pagar',function(){
-    return view('vistas.pagar_prueba');
-})->name('pagar');
+// Route::get('pagar','CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
+
+// });
+
+
+//Route::get('pagar','CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
 
 });
+// Route::post('pedidos/{id}',function(){
 
-Route::post('pedidos/{id}',function(){
+    //     return view('vistas.pagar_prueba');
 
-    return view('vistas.pagar_prueba');
+    // })->name('pagar');
 
-})->name('pagar');
-
+Route::get('hola', 'CarroComprasController@store');
 
 
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
