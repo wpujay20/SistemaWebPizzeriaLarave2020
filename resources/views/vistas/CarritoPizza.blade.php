@@ -96,7 +96,9 @@
 
                                 ?>
                                 {{-- {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post','files'=>true]) !!} --}}
-                                {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post']) !!}
+                                {{-- {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post']) !!}
+                                {{ csrf_field()}} --}}
+                                {!! Form::open(['route' => 'confirmar.pago','method' => 'post']) !!}
                                 {{ csrf_field()}}
 
 
@@ -115,22 +117,25 @@
 										<td>
 											<select name="distrito" id="distrito" >
 												<option value="">--Distritos Disponibles--</option>
-												<option value="Villa el Salvado">Villa el Salvador</option>
-												<option value="Villa Maria del Triunfo">Villa Maria del Triunfo</option>
-												<option value="Pachacamac">Pachacamac</option>
-												<option value="Lurín">Lurín</option>
+												<option value="1">Villa el Salvador</option>
+												<option value="2">Villa Maria del Triunfo</option>
+												<option value="3">Pachacamac</option>
+												<option value="4">Lurín</option>
 											</select>
 										</td>
 									</thead>
                                 </table>
-
+                                <button type="submit" class="btn button">Proceder a Pagar </button>
                                 {!! form::close()   !!}
-                                <script src="{{asset('js/carrito.js')}}"></script>
+                                
+                                {{-- <script src="{{asset('js/carrito.js')}}"></script>
+
                                 <button disabled style="margin-left: 500px;" id="btn" type="submit">
                                     <script src="{{asset('js/MercadoPago.js')}}"
                                     data-preference-id="<?php   echo $preference->id; ?>">
                                         </script>
-                                </button>
+                                </button> --}}
+
                                 <form action="{{route('cart.removeitem')}}" method="POST">
                                     @csrf
                                 <input type="hidden" name="pizza_id" value="{{$item->id}}">

@@ -10,6 +10,10 @@ use Darryldecode\Cart;
 use App\pizza;
 use App\tipo_pizza;
 use Illuminate\Support\Facades\Auth;
+
+
+require '../vendor/autoload.php';
+
 class CarroComprasController extends Controller
 {
     /**
@@ -59,9 +63,43 @@ class CarroComprasController extends Controller
         return back()->with('success',"Producto eliminado con éxito de su carrito.");
     }
 
-        public function MostrarCarrito(){
-            return view('vistas.CarritoPizza');
+    public function MostrarCarrito(){
+        return view('vistas.CarritoPizza');
+    }
+
+    public function Confirmar(Request $request){
+        $datos=$request->all();
+        var_dump($datos);
+
+        $payer=new MercadoPago\Payer();
+        $payer->address=array(
+            "Direccion" => $datos->direc,
+            "Referencia" => $datos->ref,
+            "Distrito" => $datos->distri
+        );
+        
+        //$direc=$payer->address;
+
+
+        return "Hola mundo";
+    }
+
+    function ProcesarPago(Request $request){
+
+        $pago=$request->all();
+        
+        if($pago->status=="success"){
+            //INSERSICION A LA BD DE LA VENTA
+
+
+
+
+        } else {
+            //NELSON NO PASAS
         }
+
+
+    }
 
 
     public function index()

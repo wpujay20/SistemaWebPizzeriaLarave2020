@@ -151,7 +151,7 @@ Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 
 // });
 
 
-//Route::get('pagar','CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
+Route::post('pagar','CarroComprasController@Confirmar')->name('confirmar.pago');
 
 });
 // Route::post('pedidos/{id}',function(){
