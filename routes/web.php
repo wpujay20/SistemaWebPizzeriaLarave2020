@@ -137,7 +137,7 @@ Route::get('ventas_delivery',function(){
 Route::get('ventas_delivery/edit/{dato}',          ['middleware' => [], 'as' => 'ventas_delivery.edit',       'uses' => 'VentasController@edit' ]);
 Route::get('ventas_delivery/{dato}',               ['middleware' => [], 'as' => 'ventas_delivery.show',       'uses' => 'VentasController@show' ]);
 Route::put('ventas_delivery/actualizar/{dato}',    ['middleware' => [], 'as' => 'ventas_delivery.update',     'uses' => 'VentasController@update' ]);
-Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 'ventas_delivery.destroy',     'uses' => 'VentasController@destroy' ] );
+Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 'ventas_delivery.destroy',     'uses' => 'VentasController@destroy' ]);
 
 //pagar por lado del cliente
 
@@ -150,7 +150,7 @@ Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 
 
 // });
 
-
+//Route::post('HistorialPedidos/{id}',          ['middleware' => [], 'as' => 'Pedidos',       'uses' => 'CarroComprasController@Historial' ]);
 //Route::get('pagar','CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
 
 });
@@ -169,6 +169,8 @@ Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 //Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('Historial','PerfilDeUsuarioController@Historial')->name('historial.pedido');
 
 Route::get('home',function(){
     $usu = new usuario();

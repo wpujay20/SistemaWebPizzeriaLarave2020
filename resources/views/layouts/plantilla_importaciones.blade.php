@@ -136,12 +136,12 @@ if (Auth::check()){
 				<ul class="links">
 					<li>
 						<a href="{{route("PerfilDeUsuario.show","". Auth::user()->persona_id."")}}" name="Perfil">
-                            <h3>Mi Perfil</h3>
+                            <h3>Mi Perfil</h3>	
 						</a>
 						<p><span> Aqui podrás gestionar los datos de tu perfil</span></p>
 					</li>
 					<li>
-						<a href="" name="Perfil">
+						<a href="{{route("historial.pedido","". Auth::user()->id."")}}" name="Pedidos">
 							<h3>Tus Pedidos</h3>
 						</a>
 

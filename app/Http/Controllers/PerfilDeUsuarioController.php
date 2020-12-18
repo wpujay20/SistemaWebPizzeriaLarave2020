@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditPerfilUsuario;
 use App\Http\Requests\CreatePerfilUsuarioRequest;
-
+use Illuminate\Support\Facades\Auth;
 use App\usuario;
 use App\persona;
-
-
+use App\venta_delivery;
+use App\detalle_venta;
 
 class PerfilDeUsuarioController extends Controller
 {
@@ -127,4 +127,20 @@ class PerfilDeUsuarioController extends Controller
     {
         //
     }
+
+    
+    public function Historial()
+    {
+
+        $id=Auth::user()->id;
+        $pedido = DB::table('venta_deliveries')
+        ->join('lugar_entregas','lugar_entregas.lugarentrega_id','=','venta_deliveries.lugarentrega_id')
+        ->select('venta_deliveries.*','lugar_entregas.*')
+        ->where('venta_deliveries.usuario_id', $id)
+        ->get();
+        return view('vistas.HistorialPedidos',compact("pedido"));
+        
+    }
+
+
 }

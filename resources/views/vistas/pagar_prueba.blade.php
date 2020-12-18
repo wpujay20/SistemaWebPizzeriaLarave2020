@@ -68,9 +68,9 @@ $preference->save();
                         <button type="submit" style="" class="btn btn-warning ">Cancelar Pago</button>
                         </div>
                         </form>
+                        
 
-
-                        </di>
+                        </div>
                           
                     </div>
                     
