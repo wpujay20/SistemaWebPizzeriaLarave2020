@@ -47,7 +47,7 @@
                                     <td>{{$item->lugar_direccion}} </td>
                                     <td>{{$item->lugar_distrito}} </td>
                                     <td>{{$item->vnt_estado}} </td>
-                                    <form action="" method="POST">
+                                    <form action="{{route('boleta.index')}}" method="POST">
                                         @csrf
                                     <input type="hidden" name="ventaid" value="{{$item->ventadelivery_id}}">
                                      <td><button type="submit" >Ver detalle</button></td>   

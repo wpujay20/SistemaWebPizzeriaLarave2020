@@ -172,6 +172,9 @@ Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
 
 Route::get('Historial','PerfilDeUsuarioController@Historial')->name('historial.pedido');
 
+Route::post('boleta','PerfilDeUsuarioController@Boleta')->name('boleta.index');
+
+
 Route::get('home',function(){
     $usu = new usuario();
     return $usu->validarRuta();

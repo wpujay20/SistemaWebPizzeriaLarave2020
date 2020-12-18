@@ -142,5 +142,21 @@ class PerfilDeUsuarioController extends Controller
         
     }
 
+    public function Boleta(Request $request){
+        $idven=$request->all();
+        
+        $venta=DB::table('detalle_ventas')
+        ->join('venta_deliveries','venta_deliveries.ventadelivery_id','=','detalle_ventas.ventadelivery_id')
+        ->join('usuarios','usuarios.id','=','venta_deliveries.usuario_id')
+        ->join('personas','personas.persona_id','=','usuarios.persona_id')
+        ->join('lugar_entregas','lugar_entregas.lugarentrega_id','=','venta_deliveries.lugarentrega_id')
+        ->join('pizzas','pizzas.pizza_id','=','detalle_ventas.pizza_id')
+        ->join('tipo_pizzas','tipo_pizzas.tipopizza_id','=','pizzas.tipopizza_id')
+        ->select('detalle_ventas.*','pizzas.*','tipo_pizzas.*','lugar_entregas.*','personas.*','usuarios.*','venta_deliveries.vnt_monto_final')
+        ->where('venta_deliveries.ventadelivery_id',$idven['ventaid'])
+        ->get();
+
+        return view('vistas.example1.index',compact('venta'));
+    }
 
 }
