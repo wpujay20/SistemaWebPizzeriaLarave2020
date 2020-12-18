@@ -45,7 +45,9 @@ class CarroComprasController extends Controller
     public function clear(){
         Cart::clear();
         Cart::session(Auth::user()->id)->clear();
-        return back()->with('success',"The shopping cart has successfully beed added to the shopping cart!");
+        //return back()->with('success',"The shopping cart has successfully beed added to the shopping cart!");
+        return redirect("/CatalogoPizzas");
+
     }
 
     public function removeitem(Request $request) {
@@ -113,6 +115,8 @@ class CarroComprasController extends Controller
 public function ProcesarPago(Request $request){
     MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a885608db6889a86-627932043');
     $venta = new venta_delivery();
+    $personal= new personal_entrega();
+
     $Carrito= Cart::session(Auth::user()->id)->getContent();
 
     
@@ -148,23 +152,26 @@ public function ProcesarPago(Request $request){
 
     $ultimoIdVnt = venta_delivery::latest('ventadelivery_id')->first();
     $idVnt=  $ultimoIdVnt["ventadelivery_id"];
-        
+    
     
     foreach ($Carrito as $item){
         
         $detalle = new detalle_venta();
-        echo " ". $detalle->ventadelivery_id = $idVnt;
-        echo " ". $detalle->pizza_id = $item->id;
-        echo " ". $detalle->det_cantidad= $item->quantity;
-        echo " ". $detalle->det_precio_unitario= $item->price;
-        echo " ". $detalle->det_subtotal=$item->quantity*$item->price;
-        echo " ".  $detalle->save();
+        $detalle->ventadelivery_id = $idVnt;
+        $detalle->pizza_id = $item->id;
+        $detalle->det_cantidad= $item->quantity;
+        $detalle->det_precio_unitario= $item->price;
+        $detalle->det_subtotal=$item->quantity*$item->price;
+        $detalle->save();
     }
-   
+
+    $personalEdit =personal_entrega::findOrFail($idPentrega["personalentrega_id"]);
+    $personalEdit->update(["estado_id"=>"3"]);
+  
     Cart::clear();
     Cart::session(Auth::user()->id)->clear();
 
-    return view("/");
+    return redirect("/index_buena_pizza");
 
     }
 

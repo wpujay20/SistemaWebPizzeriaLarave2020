@@ -1,12 +1,10 @@
 @extends('../layouts/plantilla_importaciones')
 
-
 @section('titulo')
 		Pagar
 @endsection
 
 
-@section('cuerpo_seccion')
 
  <?php
 // SDK de Mercado Pago
@@ -42,14 +40,50 @@ $preference->save();
 
 ?>
 
-<center>
-
-
-        <script  src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
-            data-preference-id="<?php echo $preference->id; ?>">
-        </script>
  
-</center>
+@section('cuerpo_seccion')
+<body class="single is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Main -->
+		<div id="main">
+			<!-- Post -->
+			<article class="post">
+                <header>
+					<div class="title">
+						<h2>CONFIRMAR PAGO</h2>
+					</div>
+				</header>
+				<div class="container" >
+                    <div class="row "  >
+                        <div  class="col" style="display:inline;margin:5px;"  >
+                        <div class="card" style="width: 100%; float: middle" style="text-align: center; margin:2px auto">
+                            <script  src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
+                                data-preference-id="<?php echo $preference->id; ?>">
+                            </script>
+                        </div>
+                        <form action="{{route('cart.clear')}}" method="GET">
+                        @csrf
+                        <div class="card" style="width: 100%; float: middle" style="text-align: center; margin:2px auto">
+                        <button type="submit" style="" class="btn btn-warning ">Cancelar Pago</button>
+                        </div>
+                        </form>
+
+
+                        </di>
+                          
+                    </div>
+                    
+ 
+
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+
+
+ 
 
 @endsection
 

@@ -66,37 +66,7 @@
                                     </tr>
 								<tbody>
                             </table>
-                            <?php
-                                // SDK de Mercado Pago
-                                //require __DIR__ .  '/vendor/autoload.php';
-                                require '../vendor/autoload.php';
-
-
-                                // Agrega credenciales
-                                MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a885608db6889a86-627932043');
-
-                                // Crea un objeto de preferencia
-                                $preference = new MercadoPago\Preference();
-                                $preference->back_urls = array(
-                                    "success" => "http://sistemawebpizzerialarave2020.test:9090/hola", // redireccionar a la lsita de pedidos
-                                    "failure" => "http://sistemawebpizzerialarave2020.test:9090/",
-                                    "pending" => "http://www.tu-sitio/pending"
-
-                                );
-
-                                $preference->auto_return = "approved";
-
-                                // Crea un ítem en la preferencia
-                                $item = new MercadoPago\Item();
-                                $item->title = 'Monto Total';
-                                $item->quantity = 1;
-                                $item->unit_price = Cart::getTotal();
-                                $preference->items = array($item);
-                                $preference->save();
-
-                                ?>
-                                {{-- {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post','files'=>true]) !!} --}}
-                                {!! Form::open(['url' => 'pagar','method' => 'post']) !!}
+                              {!! Form::open(['url' => 'pagar','method' => 'post']) !!}
                                 {{ csrf_field()}}
 
 
@@ -123,22 +93,13 @@
 										</td>
 									</thead>
                                 </table>
-                                <button type="submit">PROCEDER A PAGAR</button>
+                                <script src="{{asset('js/carrito.js')}}"></script>
+                                <button id="btn" disabled type="submit">PROCEDER A PAGAR</button>
 
                                 {!! form::close()   !!}
-                                {{-- <script src="{{asset('js/carrito.js')}}"></script>
-                                <button disabled style="margin-left: 500px;" id="btn" type="submit">
-                                    <script src="{{asset('js/MercadoPago.js')}}" data-preference-id="<?php   echo $preference->id; ?>">
-                                    prefer = new Array();
-                                    prefer=$('preference').val();
-                                    alert(prefer);
-
-
-                                    </script>
-                                </button> --}}
-                                <form action="{{route('cart.removeitem')}}" method="POST">
+                                 
+                                <form action="{{route('cart.clear')}}" method="GET">
                                     @csrf
-                                <input type="hidden" name="pizza_id" value="{{$item->id}}">
                                 <button type="submit" style="" class="btn button">Cancelar Pago</button>
                                 </form>
 

@@ -73,7 +73,7 @@ class PersonalEntregaController extends Controller
     public function edit(personal_entrega $personalEntrega)
     {
         $listaEstados = estado_personal::all(); /**LISTA PARA EL FORM */
-            return view("mant_personal.PersonalEntregaEdit", compact("personalEntrega", "listaEstados"));
+        return view("mant_personal.PersonalEntregaEdit", compact("personalEntrega", "listaEstados"));
     }
 
     /**
