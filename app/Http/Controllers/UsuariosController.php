@@ -64,8 +64,9 @@ class UsuariosController extends Controller
 
         $usuario = new usuario();
         $usuario->tipousu_id = $request->tipo_usuario;
-        $usuario->usu_correo = $request->correo;
-        $usuario->usu_pass = $request->contra;
+        $usuario->name =  $request->nombre;
+        $usuario->email = $request->correo;
+        $usuario->password = Hash::make($request->contra);
         $usuario->usu_estado = "habilitado";
         $usuario->persona_id = $Id;
         $usuario->save();
@@ -130,6 +131,7 @@ class UsuariosController extends Controller
                     'per_apellidos' =>$request->input("per_apellidos"),
                     'per_dni' =>$request->input("per_dni"),
                     'per_telefono' =>$request->input("per_telefono"),
+                    'name' =>$request->input("per_nombres"),
                     'email' =>$request->input("email"),
                     'password' =>Hash::make($request->input("password")),
                     'tipousu_id' =>$request->input("tipo_usuario"),

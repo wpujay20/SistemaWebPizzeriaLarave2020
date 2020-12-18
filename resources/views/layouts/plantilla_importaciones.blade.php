@@ -93,7 +93,7 @@ if (Auth::check()){
 
                     @if (Auth::check())
                         <li>
-                        <a  href="#" style="margin-left:auto ">Bienvenido {{Auth::user()->name}}</a>
+                        <a  href="#" style="margin-left:auto ">Bienvenido(a) {{Auth::user()->name}}</a>
                         </li>
                         {{--EL FORMULARIO DE CERRAR SESIÓN ESTÁ EN LA OTRA PARTE DE CERRAR SESIÓN --}}
                         <li>
@@ -136,7 +136,7 @@ if (Auth::check()){
 				<ul class="links">
 					<li>
 						<a href="{{route("PerfilDeUsuario.show","". Auth::user()->persona_id."")}}" name="Perfil">
-                            <h3>Mi Perfil</h3>	
+                            <h3>Mi Perfil</h3>
 						</a>
 						<p><span> Aqui podrás gestionar los datos de tu perfil</span></p>
 					</li>

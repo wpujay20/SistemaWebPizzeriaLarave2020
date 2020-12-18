@@ -17,7 +17,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
             <th>Id</th>
             <th>TipoUsuario</th>
             <th>Correo</th>
-            <th WIDTH="50" 
+            <th WIDTH="50"
 	            {{-- >Contraseña</th> --}}
             <th>Estado</th>
             <th>Nombre</th>
@@ -67,7 +67,7 @@ Mantenimientos Pizzeria "La Buena Pizza"
     <div class="modal-dialog modal-lg">
 
 
-        <form method="post" action="usuarios">
+        <form method="post" action="usuarios/create">
             {{csrf_field()}}
 
             <div class="modal-content">

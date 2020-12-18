@@ -1,4 +1,4 @@
- 
+
 
 <!DOCTYPE html>
 <html lang="es" class="no-js">
@@ -81,7 +81,7 @@
         </div>
     <div class="cuerpo">
 
-        <section> 
+        <section>
             @yield('cuerpo_seccion')
 		</section>
 
