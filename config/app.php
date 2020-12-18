@@ -228,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'MercadoPago' => MercadoPago\Entities\Shared\Payer::class 
+
     ],
 
 ];

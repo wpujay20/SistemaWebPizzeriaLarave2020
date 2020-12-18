@@ -154,20 +154,26 @@ Route::delete('ventas_delivery/{dato}',            ['middleware' => [], 'as' => 
 //Route::get('pagar','CarroComprasController@MostrarCarrito')->name('Mostrar.Carrito');
 
 });
-// Route::post('pedidos/{id}',function(){
+// Route::get('pagar',function(){
 
-    //     return view('vistas.pagar_prueba');
+//         return view('vistas.pagar_prueba');
 
-    // })->name('pagar');
+//     })->name('pagar');
 
-Route::get('hola', 'CarroComprasController@store');
+// Route::get('hola', 'CarroComprasController@store');
 
+Route::post('pagar','CarroComprasController@Confirmar')->name('confirmar.pago');
+Route::get('procesar_pago','CarroComprasController@ProcesarPago')->name('confirmar.pago');
 
 Route::resource('/CatalogoPizzas', CatalogoPizzasController::class);
 Route::resource('/CarroCompras', CarroComprasController::class);
 Route::resource('/PerfilDeUsuario', PerfilDeUsuarioController::class);
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('home',function(){
+    $usu = new usuario();
+    return $usu->validarRuta();
+})->name('home');
 
 
 

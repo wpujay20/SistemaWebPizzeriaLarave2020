@@ -20,33 +20,35 @@ MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a8
 // Crea un objeto de preferencia
 $preference = new MercadoPago\Preference();
 
-$preference->back_urls = array(
-    "success" => "http://sistemawebpizzerialarave2020.test:9090/", // redireccionar a la lsita de pedidos
+$preference->back_urls = array(                                                             // ESTA INFORMACIÓN VIENE DEL COMPACT DEL MÉTODO DEL CONTROLADOR  PROCESARPAGO
+    "success" => "http://sistemawebpizzerialarave2020.test:9090/procesar_pago/?direc=".$datos['direc']."&refe=".$datos['refe'] ."&distrito=".$datos['distrito'] ."", // redireccionar a la lsita de pedidos
     "failure" => "http://www.tu-sitio/failure",
     "pending" => "http://www.tu-sitio/pending"
 );
 
 $preference->auto_return = "approved";
+ 
 
+
+Cart::session(Auth::user()->id)->getContent();
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
-$item->title = 'Mi producto Prueba xD';
+
+$item->title = 'Monto Total';
 $item->quantity = 1;
-$item->unit_price = 75.56;
+$item->unit_price = Cart::getTotal();
 $preference->items = array($item);
 $preference->save();
 
 ?>
 
 <center>
-<form action="">
 
-        <form action="/controlador@store" method="post">
-        <script src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
+
+        <script  src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
             data-preference-id="<?php echo $preference->id; ?>">
-    </script>
-
-</form>
+        </script>
+ 
 </center>
 
 @endsection

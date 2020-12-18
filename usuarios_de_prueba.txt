@@ -59,7 +59,7 @@ American Express	3711 803032 57522	    1234	11/25
 
 
 
-
+ALTER TABLE `lugar_entregas` CHANGE `lugarentrega_id` `lugarentrega_id` INT(10) NOT NULL AUTO_INCREMENT, CHANGE `lugar_direccion` `lugar_direccion` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL, CHANGE `lugar_distrito` `lugar_distrito` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL, CHANGE `created_at` `created_at` TIMESTAMP NULL DEFAULT NULL, CHANGE `updated_at` `updated_at` TIMESTAMP NULL DEFAULT NULL;
 
 
 

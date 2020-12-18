@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-
+use MercadoPago;
+use App\detalle_venta;
 use App\Http\Controllers\Controller;
+use App\lugar_entrega;
 use Illuminate\Http\Request;
-use Darryldecode\Cart;
-//use Cart;
+use Cart;
 use App\pizza;
 use App\tipo_pizza;
+use App\venta_delivery;
+use App\personal_entrega;
 use Illuminate\Support\Facades\Auth;
+//require '../../../vendor/autoload.php';
 class CarroComprasController extends Controller
 {
     /**
@@ -88,18 +92,100 @@ class CarroComprasController extends Controller
     public function store(Request $request)
     {
 
-        
+        $venta = new venta_delivery();
+        $detalle = new detalle_venta();
+        $lugar = new lugar_entrega();
+
+        $dato = $request-> all();
+
+
+
         $dato= $request->all();
         echo "<pre>". var_export($dato). "</pre>";
 
-        $carrito =  Cart::session(Auth::user()->id)->getContent();
-        $car= $carrito->toArray();
-         var_dump($car); //. "</pre>";
+        //. "</pre>";
 
 
 
         return "Hola mudio";
     }
+
+public function ProcesarPago(Request $request){
+    MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a885608db6889a86-627932043');
+    $venta = new venta_delivery();
+    $Carrito= Cart::session(Auth::user()->id)->getContent();
+
+    
+   // var_dump($Carrito);
+ 
+    $lugar = new lugar_entrega();
+    //$personal = new personal_entrega();
+    $dato=$request->all();
+
+    //Inserción a la tabla lugar_entregas
+    $lugar->lugar_direccion = $dato['direc'];
+    $lugar->lugar_distrito  = $dato['distrito']. " Con referencia: ". $dato['refe'];
+    $lugar->save();
+
+    //inserción a la Tabla Venta
+    $ultimoId = lugar_entrega::latest('lugarentrega_id')->first();
+    $idLugar=  $ultimoId["lugarentrega_id"];
+
+    $idPer=personal_entrega::select('personalentrega_id')
+    ->where('estado_id','1')
+    ->inRandomOrder()
+    ->first();
+    $idPentrega= $idPer->toArray();
+    //var_dump($idPentrega["personalentrega_id"]);
+ 
+
+    $venta->lugarentrega_id = $idLugar;
+    $venta->usuario_id = Auth::user()->id;
+    $venta->personalentrega_id= $idPentrega["personalentrega_id"];
+    $venta->vnt_monto_final= Cart::getTotal();
+    $venta->vnt_estado = "Cancelado";
+    $venta->save();
+
+    $ultimoIdVnt = venta_delivery::latest('ventadelivery_id')->first();
+    $idVnt=  $ultimoIdVnt["ventadelivery_id"];
+        
+    
+    foreach ($Carrito as $item){
+        
+        $detalle = new detalle_venta();
+        echo " ". $detalle->ventadelivery_id = $idVnt;
+        echo " ". $detalle->pizza_id = $item->id;
+        echo " ". $detalle->det_cantidad= $item->quantity;
+        echo " ". $detalle->det_precio_unitario= $item->price;
+        echo " ". $detalle->det_subtotal=$item->quantity*$item->price;
+        echo " ".  $detalle->save();
+    }
+   
+    Cart::clear();
+    Cart::session(Auth::user()->id)->clear();
+
+    return view("/");
+
+    }
+
+    public function Confirmar(Request $request){
+        // Agrega credenciales
+        MercadoPago\SDK::setAccessToken('TEST-2941640367030214-081821-27d9f068ff19cbc1a885608db6889a86-627932043');
+
+        $datos=$request->all();
+
+
+        $payer=new MercadoPago\Payer();
+        $payer->address=array(
+            "Direccion" => $datos["direc"],
+            "Referencia" => $datos["refe"],
+            "Distrito" => $datos["distrito"]
+        );
+
+        //$direc=$payer->address;
+        return view('vistas.pagar_prueba', compact('datos'));
+    }
+
 
     /**
      * Display the specified resource.

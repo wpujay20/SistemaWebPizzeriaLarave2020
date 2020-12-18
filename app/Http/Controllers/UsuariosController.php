@@ -131,7 +131,7 @@ class UsuariosController extends Controller
                     'per_dni' =>$request->input("per_dni"),
                     'per_telefono' =>$request->input("per_telefono"),
                     'email' =>$request->input("email"),
-                    'password' =>Hash::make($request->input("password"),),
+                    'password' =>Hash::make($request->input("password")),
                     'tipousu_id' =>$request->input("tipo_usuario"),
                     'usu_estado' =>$request->input("usu_estado")
         ]);

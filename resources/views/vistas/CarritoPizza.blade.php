@@ -77,11 +77,11 @@
 
                                 // Crea un objeto de preferencia
                                 $preference = new MercadoPago\Preference();
-
                                 $preference->back_urls = array(
                                     "success" => "http://sistemawebpizzerialarave2020.test:9090/hola", // redireccionar a la lsita de pedidos
                                     "failure" => "http://sistemawebpizzerialarave2020.test:9090/",
                                     "pending" => "http://www.tu-sitio/pending"
+
                                 );
 
                                 $preference->auto_return = "approved";
@@ -96,7 +96,7 @@
 
                                 ?>
                                 {{-- {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post','files'=>true]) !!} --}}
-                                {!! Form::open(['url' => '/ventas_delivery/create','method' => 'post']) !!}
+                                {!! Form::open(['url' => 'pagar','method' => 'post']) !!}
                                 {{ csrf_field()}}
 
 
@@ -123,14 +123,19 @@
 										</td>
 									</thead>
                                 </table>
+                                <button type="submit">PROCEDER A PAGAR</button>
 
                                 {!! form::close()   !!}
-                                <script src="{{asset('js/carrito.js')}}"></script>
+                                {{-- <script src="{{asset('js/carrito.js')}}"></script>
                                 <button disabled style="margin-left: 500px;" id="btn" type="submit">
-                                    <script src="{{asset('js/MercadoPago.js')}}"
-                                    data-preference-id="<?php   echo $preference->id; ?>">
-                                        </script>
-                                </button>
+                                    <script src="{{asset('js/MercadoPago.js')}}" data-preference-id="<?php   echo $preference->id; ?>">
+                                    prefer = new Array();
+                                    prefer=$('preference').val();
+                                    alert(prefer);
+
+
+                                    </script>
+                                </button> --}}
                                 <form action="{{route('cart.removeitem')}}" method="POST">
                                     @csrf
                                 <input type="hidden" name="pizza_id" value="{{$item->id}}">
