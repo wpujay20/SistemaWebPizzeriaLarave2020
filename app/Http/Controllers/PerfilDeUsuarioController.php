@@ -12,7 +12,7 @@ use App\usuario;
 use App\persona;
 use App\venta_delivery;
 use App\detalle_venta;
-
+use PDF;
 class PerfilDeUsuarioController extends Controller
 {
     /**
@@ -156,7 +156,10 @@ class PerfilDeUsuarioController extends Controller
         ->where('venta_deliveries.ventadelivery_id',$idven['ventaid'])
         ->get();
 
-        return view('vistas.example1.index',compact('venta'));
+        $pdf= PDF::loadView('vistas.example1.index',['venta' =>$venta])->setPaper('a4','landscape');
+        //return $pdf->download('boleta'.$idven['ventaid'].'.pdf');
+        return $pdf->stream('boleta'.$idven['ventaid'].'.pdf');
+        //return view('vistas.example1.index',compact('venta'));
     }
 
 }

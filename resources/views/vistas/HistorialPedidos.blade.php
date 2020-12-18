@@ -50,7 +50,7 @@
                                     <form action="{{route('boleta.index')}}" method="POST">
                                         @csrf
                                     <input type="hidden" name="ventaid" value="{{$item->ventadelivery_id}}">
-                                     <td><button type="submit" >Ver detalle</button></td>   
+                                     <td><button type="submit" formtarget="_blank">Ver detalle</button></td>   
                                     </form>
                                     </tr>
                                          @endforeach

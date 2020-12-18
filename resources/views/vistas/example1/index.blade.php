@@ -5,7 +5,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 1</title>
+    <title>Boleta</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}" media="all" />
   </head>
   <body>
@@ -14,21 +14,23 @@
         <img src="{{asset('images/buena_pizza_logo.jpg')}}">
       </div>
       <h1>La Buena Pizza</h1>
-      <div id="company" class="clearfix">
-        <div>La Buena Pizza</div>
-        <div>Sector 7 Grupo 4 Mz B lt 14 cruce Av. 200 millas con pastor sevilla <br/> Villa El Salvador, Lima PE</div>
-        <div>952 343 540</div>
-        {{-- <div><a href="mailto:company@example.com">company@example.com</a></div> --}}
-      </div>
-      
-    
       <div id="project">
-      
-        <div><span>CLIENTE</span>{{$venta[0]->per_nombres}}</div>
+        <div><span>CLIENTE</span>{{$venta[0]->per_nombres." ".$venta[0]->per_apellidos}}</div>
         <div><span>DIRECCION</span> {{$venta[0]->lugar_direccion}} </div>
         <div><span>EMAIL</span> <a href="mailto:{{$venta[0]->email}}">{{$venta[0]->email}}</a></div>
         <div><span>FECHA</span> {{$venta[0]->created_at}}</div>
       </div>
+
+
+      <div id="project" style="margin-left: 370px">
+        <div>La Buena Pizza</div>
+        <div>Sector 7 Grupo 4 Mz B lt 14 <br>cruce Av. 200 millas con pastor sevilla <br/> Villa El Salvador, Lima PE</div>
+        <div>952 343 540</div>
+        <div><a href="https://www.facebook.com/LaBuenaPizzaOficial/">LaBuenaPizzaOficial FB</a></div> 
+      </div>
+
+      
+
     </header>
     <main>
       <table>
@@ -63,7 +65,7 @@
      
     </main>
     <footer>
-      <h2>&copy La Buena Pizza 2020</h2>
+      <h2> La Buena Pizza 2020</h2>
     </footer>
   </body>
 </html>
