@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditPerfilUsuario;
 use App\Http\Requests\CreatePerfilUsuarioRequest;
-
+use Illuminate\Support\Facades\Auth;
 use App\usuario;
 use App\persona;
-
-
-
+use App\venta_delivery;
+use App\detalle_venta;
+use PDF;
 class PerfilDeUsuarioController extends Controller
 {
     /**
@@ -127,4 +127,39 @@ class PerfilDeUsuarioController extends Controller
     {
         //
     }
+
+    
+    public function Historial()
+    {
+
+        $id=Auth::user()->id;
+        $pedido = DB::table('venta_deliveries')
+        ->join('lugar_entregas','lugar_entregas.lugarentrega_id','=','venta_deliveries.lugarentrega_id')
+        ->select('venta_deliveries.*','lugar_entregas.*')
+        ->where('venta_deliveries.usuario_id', $id)
+        ->get();
+        return view('vistas.HistorialPedidos',compact("pedido"));
+        
+    }
+
+    public function Boleta(Request $request){
+        $idven=$request->all();
+        
+        $venta=DB::table('detalle_ventas')
+        ->join('venta_deliveries','venta_deliveries.ventadelivery_id','=','detalle_ventas.ventadelivery_id')
+        ->join('usuarios','usuarios.id','=','venta_deliveries.usuario_id')
+        ->join('personas','personas.persona_id','=','usuarios.persona_id')
+        ->join('lugar_entregas','lugar_entregas.lugarentrega_id','=','venta_deliveries.lugarentrega_id')
+        ->join('pizzas','pizzas.pizza_id','=','detalle_ventas.pizza_id')
+        ->join('tipo_pizzas','tipo_pizzas.tipopizza_id','=','pizzas.tipopizza_id')
+        ->select('detalle_ventas.*','pizzas.*','tipo_pizzas.*','lugar_entregas.*','personas.*','usuarios.*','venta_deliveries.vnt_monto_final')
+        ->where('venta_deliveries.ventadelivery_id',$idven['ventaid'])
+        ->get();
+
+        $pdf= PDF::loadView('vistas.example1.index',['venta' =>$venta])->setPaper('a4','landscape');
+        //return $pdf->download('boleta'.$idven['ventaid'].'.pdf');
+        return $pdf->stream('boleta'.$idven['ventaid'].'.pdf');
+        //return view('vistas.example1.index',compact('venta'));
+    }
+
 }

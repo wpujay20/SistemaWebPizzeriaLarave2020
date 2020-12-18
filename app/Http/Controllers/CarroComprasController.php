@@ -193,6 +193,12 @@ public function ProcesarPago(Request $request){
         return view('vistas.pagar_prueba', compact('datos'));
     }
 
+    // public function Historial(){
+
+
+
+    //     return view('vistas.HistorialPedidos');
+    // }
 
     /**
      * Display the specified resource.
