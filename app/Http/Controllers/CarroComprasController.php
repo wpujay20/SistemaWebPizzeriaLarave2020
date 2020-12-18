@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Darryldecode\Cart;
-//use Cart;
+
+use Cart;
 use App\pizza;
 use App\tipo_pizza;
 use Illuminate\Support\Facades\Auth;
